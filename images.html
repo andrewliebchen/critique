@@ -8,21 +8,21 @@
 </head>
 
 <body>
-  {{>dropboxChooser}}
   {{>image}}
+  {{>dropboxChooser}}
 </body>
-
-<template name="dropboxChooser">
-  <button type="button" id="mtr_dropbox">Click here to Choose Dropbox Files</button>
-</template>
 
 <template name="image">
   <div class="image-container">
     {{#each image}}
-      <img src="{{link}}">
       {{#if image}}
+        <img src="{{link}}">
         <button class="mtr_delete-image">Delete image</button>
       {{/if}}
     {{/each}}
   </div>
+</template>
+
+<template name="dropboxChooser">
+  <button type="button" id="mtr_dropbox">Click here to Choose Dropbox Files</button>
 </template>

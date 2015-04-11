@@ -1,6 +1,6 @@
-if (Meteor.isClient) {
-  Session.setDefault('dropboxImage', null);
+Images = new Mongo.Collection('images');
 
+if (Meteor.isClient) {
   Template.dropboxChooser.events({
     'click #mtr_dropbox' : function(event){
       event.preventDefault();
@@ -8,7 +8,12 @@ if (Meteor.isClient) {
         linkType: 'direct',
         multiselect: false,
         success: function(image){
-          Session.set('dropboxImage', image);
+          var expirationTime = moment().add(4, 'h').format();
+
+          Meteor.call('createImage', _.extend(
+            _.extend.apply(_, image),
+            {expires: expirationTime}
+          ));
         },
         cancel: function(){
           console.log('Cancelled');
@@ -19,19 +24,29 @@ if (Meteor.isClient) {
 
   Template.image.helpers({
     image: function(){
-      return Session.get('dropboxImage');
+      return Images.find({});
     }
   });
 
   Template.image.events({
     'click .mtr_delete-image': function(){
-      Session.set('dropboxImage', null);
+      Meteor.call('deleteImage', this._id);
     }
   });
 }
 
 if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
+  // Meteor.startup(function(){
+  //   Images.remove({});
+  // });
+
+  Meteor.methods({
+    'createImage': function(image){
+      Images.insert(image);
+    },
+
+    'deleteImage': function(imageId){
+      Images.remove(imageId);
+    }
   });
 }
