@@ -13,12 +13,21 @@
 </body>
 
 <template name="image">
-  <div class="image-container">
     {{#each image}}
       {{#if image}}
-        <img src="{{link}}">
+        <div class="image-container mtr_create-placemark">
+          <img src="{{link}}">
+          {{>placemarks}}
+        </div>
         <button class="mtr_delete-image">Delete image</button>
       {{/if}}
+    {{/each}}
+</template>
+
+<template name="placemarks">
+  <div class="placemarks">
+    {{#each placemark}}
+      <div class="placemark" style="top:{{top}}px; left:{{left}}px;"></div>
     {{/each}}
   </div>
 </template>
