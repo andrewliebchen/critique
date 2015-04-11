@@ -1,0 +1,11 @@
+/* CSS declarations go here */
+
+html,
+body {
+  font-family: "helvetica neue", helvetica, arial, sans-serif;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}

@@ -1,0 +1,28 @@
+<head>
+  <title>images</title>
+  <script type="text/javascript"
+    src="https://www.dropbox.com/static/api/2/dropins.js"
+    id="dropboxjs"
+    data-app-key="lfhonqf66tf5ppw">
+  </script>
+</head>
+
+<body>
+  {{>dropboxChooser}}
+  {{>image}}
+</body>
+
+<template name="dropboxChooser">
+  <button type="button" id="mtr_dropbox">Click here to Choose Dropbox Files</button>
+</template>
+
+<template name="image">
+  <div class="image-container">
+    {{#each image}}
+      <img src="{{link}}">
+      {{#if image}}
+        <button class="mtr_delete-image">Delete image</button>
+      {{/if}}
+    {{/each}}
+  </div>
+</template>
