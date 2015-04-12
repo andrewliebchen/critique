@@ -1,5 +1,5 @@
 <head>
-  <title>images</title>
+  <title>Critique</title>
   <script type="text/javascript"
     src="https://www.dropbox.com/static/api/2/dropins.js"
     id="dropboxjs"
@@ -9,6 +9,7 @@
 
 <body>
   {{>image}}
+  {{>comments}}
   {{>dropboxChooser}}
 </body>
 
@@ -18,9 +19,9 @@
         {{#unless expired}}
           <p>Expires {{timeLeft}} ({{expiration}}).</p>
           <button class="mtr_delete-image">Delete image</button>
-          <div class="image-container mtr_add-placemark">
+          <div class="image-container">
             {{>placemarks}}
-            <img src="{{link}}">
+            <img src="{{link}}" class="mtr_add-placemark">
           </div>
         {{else}}
           <p>Image expired at {{expiration}}</p>
@@ -32,8 +33,26 @@
 <template name="placemarks">
   <div class="placemarks">
     {{#each placemark}}
-      <div class="placemark" style="top:{{top}}px; left:{{left}}px;"></div>
+      <div class="placemark mtr_placemark{{#if active}} is-active{{/if}}"
+        style="top:{{top}}px; left:{{left}}px;">
+      </div>
     {{/each}}
+  </div>
+</template>
+
+<template name="comments">
+  <div class="comments">
+    {{#each comment}}
+      <div class="comment">
+        <h3>{{name}}</h3>
+        <p>{{message}}</p>
+      </div>
+    {{/each}}
+    <div class="new-comment">
+      <input type="text" class="mtr_user">
+      <textarea class="mtr_message"></textarea>
+      <button class="mtr_add-comment">Add comment</button>
+    </div>
   </div>
 </template>
 
