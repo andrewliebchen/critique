@@ -1,3 +1,8 @@
+// Split up this file
+// Add iron router
+// Cookie current user name
+// Cookie current user email?
+
 Images = new Mongo.Collection('images');
 Placemarks = new Mongo.Collection('placemarks');
 Comments = new Mongo.Collection('comments');
@@ -49,6 +54,7 @@ if (Meteor.isClient) {
 
   Template.image.events({
     'click .mtr_add-placemark': function(event){
+      // Probably only want to do this when a comment is added
       var top = event.clientY + document.body.scrollTop;
       Meteor.call('addPlacemark', {
         parent: this._id,
@@ -69,6 +75,10 @@ if (Meteor.isClient) {
 
     active: function(){
       return Session.equals('currentPlacemark', this._id);
+    },
+
+    commentCount: function(){
+      return Comments.find({parent: this._id}).count();
     }
   });
 
