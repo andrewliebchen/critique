@@ -9,7 +9,11 @@ img {
 }
 
 .image-container {
-  position: relative;
+  position: absolute;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .placemarks {
@@ -24,8 +28,9 @@ img {
 .placemark {
   position: absolute;
   color: white;
-  width: 2em;
-  height: 2em;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
   background-color: black;
   border: 1px solid;
   padding: 0;

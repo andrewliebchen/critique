@@ -1,5 +1,5 @@
 Images = new Mongo.Collection('images');
-Comments = new Mongo.Collection('comments');
+Placemarks = new Mongo.Collection('placemarks');
 
 if (Meteor.isClient) {
   Template.dropboxChooser.events({
@@ -26,16 +26,30 @@ if (Meteor.isClient) {
   Template.image.helpers({
     image: function(){
       return Images.find({});
+    },
+
+    expired: function(){
+      if(moment().isAfter(this.expires)){
+        return true;
+      }
+    },
+
+    timeLeft: function(){
+      return moment(this.expires).fromNow();
+    },
+
+    expiration: function(){
+      return moment(this.expires).format('h:mm a on dddd, MMM. Do')
     }
   });
 
   Template.image.events({
-    'click .mtr_create-placemark': function(){
-      console.log('click')
+    'click .mtr_add-placemark': function(event){
+      var top = event.clientY + document.body.scrollTop;
       Meteor.call('addPlacemark', {
         parent: this._id,
-        top: 10,
-        left: 10
+        top: top,
+        left: event.clientX
       });
     },
 
@@ -46,7 +60,7 @@ if (Meteor.isClient) {
 
   Template.placemarks.helpers({
     placemark: function(){
-      return Comments.find({parent: this._id});
+      return Placemarks.find({parent: this._id});
     }
   });
 }
@@ -66,7 +80,7 @@ if (Meteor.isServer) {
     },
 
     'addPlacemark': function(args){
-      Comments.insert({
+      Placemarks.insert({
         parent: args.parent,
         top: args.top,
         left: args.left

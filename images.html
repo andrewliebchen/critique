@@ -15,11 +15,16 @@
 <template name="image">
     {{#each image}}
       {{#if image}}
-        <div class="image-container mtr_create-placemark">
-          <img src="{{link}}">
-          {{>placemarks}}
-        </div>
-        <button class="mtr_delete-image">Delete image</button>
+        {{#unless expired}}
+          <p>Expires {{timeLeft}} ({{expiration}}).</p>
+          <button class="mtr_delete-image">Delete image</button>
+          <div class="image-container mtr_add-placemark">
+            {{>placemarks}}
+            <img src="{{link}}">
+          </div>
+        {{else}}
+          <p>Image expired at {{expiration}}</p>
+        {{/unless}}
       {{/if}}
     {{/each}}
 </template>
