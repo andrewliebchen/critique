@@ -1,8 +1,3 @@
-// Split up this file
-// Add iron router
-// Cookie current user name
-// Cookie current user email?
-
 Session.setDefault('currentPlacemark', null);
 Session.setDefault('currentUser', null);
 
@@ -14,11 +9,14 @@ Template.dropboxChooser.events({
       multiselect: false,
       success: function(image){
         var expirationTime = moment().add(4, 'h').format();
-
-        Meteor.call('createImage', _.extend(
+        var imageFields = _.extend(
           _.extend.apply(_, image),
           {expires: expirationTime}
-        ));
+        );
+
+        Meteor.call('createImage', imageFields, function(err, data){
+          Router.go('image', {_id: data});
+        });
       },
       cancel: function(){
         console.log('Cancelled');

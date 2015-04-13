@@ -1,6 +1,6 @@
 Meteor.methods({
   'createImage': function(image){
-    Images.insert(image);
+    return Images.insert(image);
   },
 
   'deleteImage': function(imageId){
