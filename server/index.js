@@ -17,7 +17,8 @@ Meteor.methods({
 
   'addComment': function(args){
     Comments.insert({
-      parent: args.parent,
+      parentImage: args.parentImage,
+      parentPlacemark: args.parentPlacemark,
       name: args.name,
       message: args.message,
       createdAt: args.createdAt
