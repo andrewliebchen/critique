@@ -7,11 +7,23 @@
   </script>
 </head>
 
-<body>
+<template name="application">
+  {{>yield}}
+</template>
+
+<template name="loading">
+  Its loading, fool.
+</template>
+
+<template name="home">
+  {{>dropboxChooser}}
+</template>
+
+<template name="index">
   {{>image}}
   {{>comments}}
   {{>dropboxChooser}}
-</body>
+</template>
 
 <template name="image">
     {{#each image}}

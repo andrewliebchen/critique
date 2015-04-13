@@ -8,3 +8,4 @@ meteor-platform
 insecure
 momentjs:moment
 fourseven:scss
+iron:router

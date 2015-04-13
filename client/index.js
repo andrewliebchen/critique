@@ -3,8 +3,6 @@
 // Cookie current user name
 // Cookie current user email?
 
-Meteor.subscribe('image');
-
 Session.setDefault('currentPlacemark', null);
 Session.setDefault('currentUser', null);
 
