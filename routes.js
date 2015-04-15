@@ -3,10 +3,12 @@ Router.configure({
   loadingTemplate: 'loading'
 });
 
+Router.onBeforeAction('bodyClass');
+
 Router.map(function() {
   this.route('home', { path: '/' });
 
-  this.route('image', {
+  this.route('index', {
     path: '/images/:_id',
     waitOn: function() {
       return Meteor.subscribe('image', this.params._id);

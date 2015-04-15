@@ -15,7 +15,7 @@ Template.dropboxChooser.events({
         );
 
         Meteor.call('createImage', imageFields, function(err, data){
-          Router.go('image', {_id: data});
+          Router.go('index', {_id: data});
         });
       },
       cancel: function(){
@@ -48,11 +48,13 @@ Template.image.helpers({
 Template.image.events({
   'click .mtr_add-placemark': function(event){
     // Probably only want to do this when a comment is added
-    var top = event.clientY + document.body.scrollTop;
+    var targetOffset = $(event.target).offset();
+    var top = event.clientY - targetOffset.top + document.body.scrollTop;
+    var left = event.clientX - targetOffset.left;
     Meteor.call('addPlacemark', {
       parent: this._id,
       top: top,
-      left: event.clientX
+      left: left
     });
   },
 

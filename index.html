@@ -16,24 +16,35 @@
 </template>
 
 <template name="home">
-  {{>dropboxChooser}}
+  <div class="home-content">
+    <h1>Critique</h1>
+    {{>dropboxChooser}}
+    <p>Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam.</p>
+  </div>
 </template>
 
 <template name="index">
-  {{>image}}
-  {{>comments}}
-  {{>dropboxChooser}}
+  <div class="index-content">
+    {{>image}}
+    {{>comments}}
+    <!-- {{>dropboxChooser}} -->
+  </div>
 </template>
 
 <template name="image">
     {{#each image}}
       {{#if image}}
         {{#unless expired}}
-          <p>Expires {{timeLeft}} ({{expiration}}).</p>
-          <button class="mtr_delete-image">Delete image</button>
+          <header class="image-header">
+            <div class="image-toggle">
+              <strong>Image title</strong>
+            </div>
+            <span class="image-expiration">Expires {{timeLeft}} ({{expiration}}).</span>
+            <!-- <button class="button mtr_delete-image">Delete image</button> -->
+          </header>
           <div class="image-container">
             {{>placemarks}}
-            <img src="{{link}}" class="mtr_add-placemark">
+            <img src="{{link}}">
           </div>
         {{else}}
           <p>Image expired at {{expiration}}</p>
@@ -43,7 +54,7 @@
 </template>
 
 <template name="placemarks">
-  <div class="placemarks">
+  <div class="placemarks mtr_add-placemark">
     {{#each placemark}}
       <div class="placemark mtr_placemark{{#if active}} is-active{{/if}}"
         style="top:{{top}}px; left:{{left}}px;">
@@ -54,21 +65,23 @@
 </template>
 
 <template name="comments">
-  <div class="comments">
-    {{#each comment}}
-      <div class="comment">
-        <h3>{{name}}</h3>
-        <p>{{message}}</p>
+  {{#if showComments}}
+    <div class="comments">
+      {{#each comment}}
+        <div class="comment">
+          <h3>{{name}}</h3>
+          <p>{{message}}</p>
+        </div>
+      {{/each}}
+      <div class="new-comment">
+        <input type="text" class="mtr_user">
+        <textarea class="mtr_message"></textarea>
+        <button class="mtr_add-comment">Add comment</button>
       </div>
-    {{/each}}
-    <div class="new-comment">
-      <input type="text" class="mtr_user">
-      <textarea class="mtr_message"></textarea>
-      <button class="mtr_add-comment">Add comment</button>
     </div>
-  </div>
+  {{/if}}
 </template>
 
 <template name="dropboxChooser">
-  <button type="button" id="mtr_dropbox">Click here to Choose Dropbox Files</button>
+  <button type="button" class="button button-large" id="mtr_dropbox">Click here to Choose Dropbox Files</button>
 </template>

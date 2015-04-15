@@ -9,3 +9,6 @@ insecure
 momentjs:moment
 fourseven:scss
 iron:router
+mrt:normalize.css
+andrei:iron-router-body-class
+jquery
