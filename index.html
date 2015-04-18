@@ -36,9 +36,8 @@
       {{#if image}}
         {{#unless expired}}
           <header class="image-header">
-            <div class="image-toggle">
-              <strong>Image title</strong>
-            </div>
+            {{>placemarkToggle}}
+            <h2 class="image-title">Image title</h2>
             <span class="image-expiration">Expires {{timeLeft}} ({{expiration}}).</span>
             <!-- <button class="button mtr_delete-image">Delete image</button> -->
           </header>
@@ -51,6 +50,15 @@
         {{/unless}}
       {{/if}}
     {{/each}}
+</template>
+
+<template name="placemarkToggle">
+  <div class="placemark-toggle">
+    <a class="placemark-toggle__item is-selected">{{>iconPin}}</a>
+    <a class="placemark-toggle__item">{{>iconArea}}</a>
+    <a class="placemark-toggle__item">{{>iconOkay}}</a>
+    <a class="placemark-toggle__item">{{>iconThumbsDown}}</a>
+  </div>
 </template>
 
 <template name="placemarks">
