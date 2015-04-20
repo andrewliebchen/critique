@@ -1,7 +1,9 @@
 $color-primary: #1471d4;
 
-$color-dark: #222;
+$color-dark: darken($color-primary, 40%);
 $color-light: lighten($color-primary, 40%);
+
+$color-gray-mid: #ccc;
 $color-gray-light: #f7f7f7;
 
 $transition-image: transform 0.2s ease-in-out;
@@ -20,17 +22,16 @@ $transition-image: transform 0.2s ease-in-out;
 
 html,
 body {
-  font-family: "helvetica neue", helvetica, arial, sans-serif;
+  font-family: "avenir next", helvetica, arial, sans-serif;
   background-color: $color-dark;
-  color: $color-light;
+  color: $color-primary;
   line-height: 1.3;
 }
 
 h1,
 h2,
 h3,
-p,
-button {
+p {
   margin: 0 0 1em;
 }
 
@@ -39,12 +40,51 @@ h1 {
   margin-bottom: 0.5em;
 }
 
+fieldset {
+  @include clearfix;
+  border: 0;
+  margin: 0;
+  position: relative;
+
+  + fieldset {
+    margin-top: 0.5em;
+  }
+}
+
+label {
+  transition: all 0.1s linear;
+  font-weight: normal;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  text-align: left;
+  display: block;
+  color: $color-dark;
+}
+
+input,
+textarea {
+  color: white;
+  border: 0;
+  box-shadow: none;
+  background-color: transparent;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+
+  &:focus {
+    box-shadow: none;
+    outline: none;
+  }
+}
+
+
 .button {
-  padding: 0 1em;
-  border: 3px solid;
+  padding: 0 2em;
+  border: 2px solid;
   font-weight: bold;
   background-color: transparent;
-  color: $color-light;
+  color: $color-primary;
+  border-radius: 5px;
 
   &:hover {
     background-color: $color-light;
@@ -59,7 +99,6 @@ h1 {
 
   &.button-large {
     line-height: 3em;
-    border-radius: 8px;
   }
 }
 
@@ -80,6 +119,8 @@ h1 {
 
   .button {
     width: 100%;
+    color: $color-light;
+    margin-bottom: 1em;
   }
 }
 
@@ -97,11 +138,35 @@ h1 {
 
 .image-header {
   @include clearfix;
-  padding: 1em 0 1em 4em;
+  margin: 1em 0 1em 4em;
 }
 
-.image-expiration {
+.image-title {
+  float: left;
+  line-height: 3em;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.countdown {
   float: right;
+  margin-top: 0.5em;
+  font-weight: bold;
+}
+
+.countdown__value {
+  background-color: $color-primary;
+  color: $color-dark;
+  height: 2em;
+  line-height: 2;
+  border-radius: 3px;
+  display: inline-block;
+  width: 1.5em;
+  text-align: center;
+}
+
+.countdown__spacer {
+  color: $color-primary;
 }
 
 .image-container {
@@ -118,18 +183,23 @@ h1 {
     display: block;
   }
 }
+
+.add-image {
+  margin: 2em auto 0;
+  display: block;
+}
+
 .placemark-toggle {
-  background-color: $color-dark;
+  background-color: $color-primary;
   border-radius: 5px;
-  border: 2px solid;
   box-sizing: content-box;
   display: block;
   height: 3em;
-  left: 2em;
+  left: 0;
   margin-top: -2px;
   overflow: hidden;
   position: absolute;
-  top: 1em;
+  top: 0;
   width: 3em;
   z-index: 9;
 
@@ -151,7 +221,7 @@ h1 {
     background-color: $color-light;
 
     svg {
-      fill: $color-dark;
+      fill: $color-primary;
     }
   }
 
@@ -163,7 +233,7 @@ h1 {
   svg {
     height: 2em;
     width: auto;
-    fill: $color-light;
+    fill: $color-dark;
   }
 }
 
@@ -178,24 +248,24 @@ h1 {
 
 .placemark {
   $size: 1.5em;
-  transition: $transition-image;
-  transform: translate3d(-50%, -50%, 0);
-  position: absolute;
-  width: $size;
-  height: $size;
+  background-color: $color-primary;
   border-radius: $size / 2;
-  background-color: $color-light;
-  box-shadow: inset 0 0 0 3px white, 0 3px 3px rgba(black, 0.3);
-  cursor: pointer;
-  padding: 0;
-  line-height: $size;
-  text-align: center;
+  border: 3px solid white;
+  box-shadow: 0 1px 2px rgba(black, 0.3), 0 3px 10px rgba(black, 0.3);
   color: $color-primary;
+  cursor: pointer;
   font-weight: bold;
+  height: $size;
+  line-height: $size;
+  padding: 0;
+  position: absolute;
+  text-align: center;
+  transform: translate3d(-50%, -50%, 0);
+  transition: $transition-image;
+  width: $size;
 
-  &:hover,
   &.is-selected {
-    background-color: $color-primary;
+    z-index: 999;
   }
 }
 
@@ -203,11 +273,26 @@ h1 {
   position: absolute;
   width: 20em;
   top: 2em;
-  background-color: $color-gray-light;
+  background-color: $color-primary;
   left: 50%;
   margin-left: -10em;
-  padding: 0.5em;
-  box-shadow: 0 3px 5px rgba(black, 0.3);
+  box-shadow: 0 1px 2px rgba(black, 0.3), 0 3px 10px rgba(black, 0.3);
   z-index: 99;
   border-radius: 5px;
+  color: $color-light;
+}
+
+.new-comment {
+  padding: 0.5em;
+
+  .button {
+    width: 100%;
+    color: $color-light;
+
+    &:hover {
+      background-color: $color-light;
+      color: $color-primary;
+      border-color: $color-light;
+    }
+  }
 }

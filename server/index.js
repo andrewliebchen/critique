@@ -8,7 +8,7 @@ Meteor.methods({
   },
 
   'addPlacemark': function(args){
-    Placemarks.insert({
+    return Placemarks.insert({
       parent: args.parent,
       top: args.top,
       left: args.left

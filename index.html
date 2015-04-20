@@ -31,26 +31,40 @@
 </template>
 
 <template name="image">
+  <div class="image">
     {{#each image}}
       {{#if image}}
-        <div class="image">
-          {{#unless expired}}
-            <header class="image-header">
-              {{>placemarkToggle}}
-              <h2 class="image-title">Image title</h2>
-              <span class="image-expiration">Expires {{timeLeft}} ({{expiration}}).</span>
-              <!-- <button class="button mtr_delete-image">Delete image</button> -->
-            </header>
-            <div class="image-container">
-              {{>placemarks}}
-              <img src="{{link}}">
-            </div>
-          {{else}}
-            <p>Image expired at {{expiration}}</p>
-          {{/unless}}
-        </div>
+        {{#unless expired}}
+          <header class="image-header">
+            {{>placemarkToggle}}
+            <strong class="image-title">{{name}}</strong>
+            {{>countdown}}
+            <!-- <span class="image-expiration">Expires {{timeLeft}} ({{expiration}}).</span> -->
+            <!-- <button class="button mtr_delete-image">Delete image</button> -->
+          </header>
+          <div class="image-container">
+            {{>placemarks}}
+            <img src="{{link}}">
+          </div>
+        {{else}}
+          <p>Image expired at {{expiration}}</p>
+        {{/unless}}
+        <button class="button button-large add-image">Add another image</button>
       {{/if}}
     {{/each}}
+  </div>
+</template>
+
+<template name="countdown">
+  <div class="countdown">
+    <span class="countdown__value hours">4</span>
+    <span class="countdown__spacer">:</span>
+    <span class="countdown__value minute_tens">0</span>
+    <span class="countdown__value minute_ones">0</span>
+    <span class="countdown__spacer">:</span>
+    <span class="countdown__value second_tens">0</span>
+    <span class="countdown__value second_ones">0</span>
+  </div>
 </template>
 
 <template name="placemarkToggle">
@@ -83,11 +97,21 @@
         <p>{{message}}</p>
       </div>
     {{/each}}
-    <div class="new-comment">
+    {{>newComment}}
+  </div>
+</template>
+
+<template name="newComment">
+  <div class="new-comment">
+    <fieldset>
+      <label>Your name</label>
       <input type="text" class="mtr_user">
+    </fieldset>
+    <fieldset>
+      <label>Your comment</label>
       <textarea class="mtr_message"></textarea>
-      <button class="mtr_add-comment">Add comment</button>
-    </div>
+    </fieldset>
+    <button class="button mtr_add-comment">Add comment</button>
   </div>
 </template>
 

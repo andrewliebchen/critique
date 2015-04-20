@@ -51,16 +51,20 @@ Template.image.helpers({
 
 Template.image.events({
   'click .mtr_add-placemark': function(event){
-    // Probably only want to do this when a comment is added
-    var showingComments = Session.get('currentPlacemark');
-    var targetOffset = $(event.target).offset();
-    var top = event.clientY - targetOffset.top + document.body.scrollTop;
-    var left = event.clientX - targetOffset.left;
-    Meteor.call('addPlacemark', {
-      parent: this._id,
-      top: top,
-      left: left
-    });
+    if(!Session.get('currentPlacemark')) {
+      // Probably only want to do this when a comment is added
+      var showingComments = Session.get('currentPlacemark');
+      var targetOffset = $(event.target).offset();
+      var top = event.clientY - targetOffset.top + document.body.scrollTop;
+      var left = event.clientX - targetOffset.left;
+      Meteor.call('addPlacemark', {
+        parent: this._id,
+        top: top,
+        left: left
+      }, function(err, id) {
+        Session.set('currentPlacemark', id);
+      });
+    }
   },
 
   'click .mtr_delete-image': function(){
@@ -89,7 +93,6 @@ Template.placemarks.events({
 });
 
 Template.comments.helpers({
-
   comment: function(){
     var currentPlacemark = Session.get('currentPlacemark');
     return Comments.find({parentPlacemark: currentPlacemark});
