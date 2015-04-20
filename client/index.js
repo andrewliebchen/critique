@@ -1,6 +1,10 @@
 Session.setDefault('currentPlacemark', null);
 Session.setDefault('currentUser', null);
 
+Template.index.helpers({
+
+});
+
 Template.dropboxChooser.events({
   'click #mtr_dropbox' : function(event){
     event.preventDefault();
@@ -48,6 +52,7 @@ Template.image.helpers({
 Template.image.events({
   'click .mtr_add-placemark': function(event){
     // Probably only want to do this when a comment is added
+    var showingComments = Session.get('currentPlacemark');
     var targetOffset = $(event.target).offset();
     var top = event.clientY - targetOffset.top + document.body.scrollTop;
     var left = event.clientX - targetOffset.left;
@@ -68,7 +73,7 @@ Template.placemarks.helpers({
     return Placemarks.find({parent: this._id});
   },
 
-  active: function(){
+  selected: function(){
     return Session.equals('currentPlacemark', this._id);
   },
 
@@ -84,6 +89,7 @@ Template.placemarks.events({
 });
 
 Template.comments.helpers({
+
   comment: function(){
     var currentPlacemark = Session.get('currentPlacemark');
     return Comments.find({parentPlacemark: currentPlacemark});
