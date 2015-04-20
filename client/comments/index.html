@@ -1,0 +1,25 @@
+<template name="comments">
+  <div class="comments">
+    {{#each comment}}
+      <div class="comment">
+        <h3>{{name}}</h3>
+        <p>{{message}}</p>
+      </div>
+    {{/each}}
+    {{>newComment}}
+  </div>
+</template>
+
+<template name="newComment">
+  <div class="new-comment">
+    <fieldset>
+      <label>Your name</label>
+      <input type="text" class="mtr_user">
+    </fieldset>
+    <fieldset>
+      <label>Your comment</label>
+      <textarea class="mtr_message"></textarea>
+    </fieldset>
+    <button class="button mtr_add-comment">Add comment</button>
+  </div>
+</template>

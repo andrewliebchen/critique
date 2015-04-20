@@ -1,0 +1,85 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: $color-dark;
+  color: $color-primary;
+  font-family: "avenir next", avenir, "helvetica neue", helvetica, arial, sans-serif;
+  line-height: 1.3;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0 0 1em;
+}
+
+h1 {
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5em;
+}
+
+fieldset {
+  @include clearfix;
+  border: 0;
+  margin: 0;
+  position: relative;
+
+  + fieldset {
+    margin-top: 0.5em;
+  }
+}
+
+label {
+  color: $color-dark;
+  display: block;
+  font-size: 0.75em;
+  font-weight: normal;
+  text-align: left;
+  text-transform: uppercase;
+  transition: all 0.1s linear;
+}
+
+input,
+textarea {
+  background-color: transparent;
+  border: 0;
+  box-shadow: none;
+  color: white;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+
+  &:focus {
+    box-shadow: none;
+    outline: none;
+  }
+}
+
+
+.button {
+  background-color: transparent;
+  border-radius: 5px;
+  border: 2px solid;
+  color: $color-primary;
+  font-weight: bold;
+  padding: 0 2em;
+
+  &:hover {
+    background-color: $color-light;
+    border-color: $color-light;
+    color: $color-primary;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(white, 0.2);
+    outline: 0;
+  }
+
+  &.button-large {
+    line-height: 3em;
+  }
+}

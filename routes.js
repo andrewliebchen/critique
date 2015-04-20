@@ -8,7 +8,7 @@ Router.onBeforeAction('bodyClass');
 Router.map(function() {
   this.route('home', { path: '/' });
 
-  this.route('index', {
+  this.route('imageShow', {
     path: '/images/:_id',
     waitOn: function() {
       return Meteor.subscribe('image', this.params._id);

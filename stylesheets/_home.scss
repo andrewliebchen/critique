@@ -1,0 +1,21 @@
+.Home {
+  background-color: $color-primary;
+  color: $color-light;
+  height: 100vh;
+  width: 100vw;
+}
+
+.home-content {
+  left: 50%;
+  margin: auto;
+  max-width: 24em;
+  position: fixed;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+
+  .button {
+    color: $color-light;
+    margin-bottom: 1em;
+    width: 100%;
+  }
+}

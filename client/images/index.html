@@ -1,0 +1,22 @@
+<template name="image">
+  {{#each image}}
+    {{#if image}}
+      {{#unless expired}}
+        <header class="image-header">
+          {{>placemarkToggle}}
+          <strong class="image-title">{{name}}</strong>
+          {{>countdown}}
+          <!-- <span class="image-expiration">Expires {{timeLeft}} ({{expiration}}).</span> -->
+          <!-- <button class="button mtr_delete-image">Delete image</button> -->
+        </header>
+        <div class="image-container">
+          {{>placemarks}}
+          <img src="{{link}}">
+        </div>
+      {{else}}
+        <p>Image expired at {{expiration}}</p>
+      {{/unless}}
+      <button class="button button-large add-image">Add another image</button>
+    {{/if}}
+  {{/each}}
+</template>

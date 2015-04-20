@@ -1,0 +1,30 @@
+<head>
+  <title>Critique</title>
+  <script type="text/javascript"
+    src="https://www.dropbox.com/static/api/2/dropins.js"
+    id="dropboxjs"
+    data-app-key="lfhonqf66tf5ppw">
+  </script>
+</head>
+
+<template name="application">
+  {{>yield}}
+</template>
+
+<template name="loading">
+  Its loading, fool.
+</template>
+
+<template name="home">
+  <div class="home-content">
+    <h1>Critique</h1>
+    {{>dropboxChooser}}
+    <p>Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam.</p>
+  </div>
+</template>
+
+<template name="imageShow">
+  <div class="image">
+    {{>image}}
+  </div>
+</template>

@@ -1,0 +1,21 @@
+<template name="placemarkToggle">
+  <div class="placemark-toggle">
+    <a class="placemark-toggle__item is-selected">{{>iconPin}}</a>
+    <a class="placemark-toggle__item">{{>iconArea}}</a>
+    <a class="placemark-toggle__item">{{>iconOkay}}</a>
+    <a class="placemark-toggle__item">{{>iconThumbsDown}}</a>
+  </div>
+</template>
+
+<template name="placemarks">
+  <div class="placemarks mtr_add-placemark">
+    {{#each placemark}}
+      <div class="placemark mtr_placemark{{#if selected}} is-selected{{/if}}"
+        style="top:{{top}}px; left:{{left}}px;">
+        {{#if selected}}
+          {{>comments}}
+        {{/if}}
+      </div>
+    {{/each}}
+  </div>
+</template>
