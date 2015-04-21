@@ -12,7 +12,7 @@ Template.dropboxChooser.events({
         );
 
         Meteor.call('createImage', imageFields, function(err, data){
-          Router.go('index', {_id: data});
+          Router.go('imageShow', {_id: data});
         });
       },
       cancel: function(){

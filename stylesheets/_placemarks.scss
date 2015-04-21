@@ -55,6 +55,14 @@
   top: 0;
 }
 
+.placemark__wrapper {
+  position: absolute;
+
+  &.is-selected {
+    z-index: 999;
+  }
+}
+
 .placemark {
   $size: 1.5em;
   background-color: $color-primary;
@@ -72,8 +80,13 @@
   transform: translate3d(-50%, -50%, 0);
   transition: $transition-image;
   width: $size;
+  z-index: 1;
 
-  &.is-selected {
-    z-index: 999;
+  .good & {
+    background-color: $color-good;
+  }
+
+  .bad & {
+    background-color: $color-bad;
   }
 }

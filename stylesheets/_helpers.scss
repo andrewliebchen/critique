@@ -1,6 +1,8 @@
-$color-primary: #1471d4;
+$color-primary: #0069df;
+$color-bad: #ff6b6b;
+$color-good: #00ffc4;
 
-$color-dark: darken($color-primary, 40%);
+$color-dark: darken($color-primary, 37%);
 $color-light: lighten($color-primary, 40%);
 
 $color-gray-mid: #ccc;

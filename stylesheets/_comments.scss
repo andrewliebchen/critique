@@ -3,16 +3,14 @@
   border-radius: 5px;
   box-shadow: $box-shadow-placemark;
   color: $color-light;
-  left: 50%;
-  margin-left: -10em;
+  left: -1.25em;
   position: absolute;
-  top: 2em;
+  top: -1.25em;
   width: 20em;
-  z-index: 99;
 }
 
 .new-comment {
-  padding: 0.5em;
+  padding: 0.5em 0.5em 0.5em 2em;
 
   .button {
     color: $color-light;

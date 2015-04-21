@@ -25,8 +25,9 @@
   border-radius: 3px;
   border: 1px solid black;
   display: inline-block;
-  margin: auto;
+  left: 50%;
   position: relative;
+  transform: translate3d(-50%, 0, 0);
   transition: $transition-image;
 
   img {

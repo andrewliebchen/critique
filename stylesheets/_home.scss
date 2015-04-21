@@ -22,5 +22,9 @@
     color: $color-light;
     margin-bottom: 1em;
     width: 100%;
+
+    &:hover {
+      color: $color-primary;
+    }
   }
 }
