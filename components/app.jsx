@@ -2,6 +2,38 @@
  * @jsx React.DOM
  */
 
+var DropboxChooser = ReactMeteor.createClass({
+  handleDropbox: function(event) {
+    event.preventDefault();
+    Dropbox.choose({
+      linkType: 'direct',
+      multiselect: false,
+      success: function(image){
+        var expirationTime = moment().add(4, 'h').format();
+        var imageFields = _.extend(
+          _.extend.apply(_, image),
+          {expires: expirationTime}
+        );
+
+        Meteor.call('createImage', imageFields, function(err, data){
+          Router.go('imageShow', {_id: data});
+        });
+      },
+      cancel: function(){
+        console.log('Cancelled');
+      }
+    });
+  },
+
+  render: function() {
+    return (
+      <button type="button" className="button button-large" onClick={this.handleDropbox}>
+        Click here to Choose Dropbox Files
+      </button>
+    );
+  }
+});
+
 var Countdown = ReactMeteor.createClass({
   render: function() {
     return (
@@ -63,6 +95,20 @@ var Image = ReactMeteor.createClass({
   }
 });
 
+var Home = ReactMeteor.createClass({
+  templateName: "Home",
+
+  render: function() {
+    return (
+      <div className="home-content">
+        <h1>Critique</h1>
+        <DropboxChooser/>
+        <p>Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio. Proin quis tortor orci. Etiam.</p>
+      </div>
+    );
+  }
+});
+
 var ImagesList = ReactMeteor.createClass({
   templateName: "Images",
 
@@ -101,14 +147,3 @@ var ImagesList = ReactMeteor.createClass({
     );
   }
 });
-
-// Template.image.events({
-//   'click .mtr_add-sticker': function(event){
-//     // Probably only want to do this when a comment is added
-//
-//   },
-
-//   'click .mtr_delete-image': function(){
-//     Meteor.call('deleteImage', this._id);
-//   }
-// });
