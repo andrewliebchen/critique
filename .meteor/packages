@@ -12,3 +12,4 @@ iron:router
 mrt:normalize.css
 andrei:iron-router-body-class
 jquery
+reactjs:react
