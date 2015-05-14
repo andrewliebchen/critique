@@ -35,16 +35,22 @@ var DropboxChooser = ReactMeteor.createClass({
 });
 
 var Countdown = ReactMeteor.createClass({
+  getMeteorState: function() {
+    return {
+      expires: moment(this.props.expires)
+    };
+  },
+
+  componentDidMount: function() {
+    setInterval(function(){
+      this.setState({done: moment(this.state.done).subtract(1, 'seconds')});
+    }.bind(this), 1000);
+  },
+
   render: function() {
     return (
       <div className="countdown">
-        <span className="countdown__value hours">4</span>
-        <span className="countdown__spacer">:</span>
-        <span className="countdown__value minute_tens">0</span>
-        <span className="countdown__value minute_ones">0</span>
-        <span className="countdown__spacer">:</span>
-        <span className="countdown__value second_tens">0</span>
-        <span className="countdown__value second_ones">0</span>
+        {this.state.done ? this.state.done.format('h:mm:ss') : null}
       </div>
     );
   }
@@ -114,7 +120,7 @@ var ImagesList = ReactMeteor.createClass({
 
   getMeteorState: function() {
     return {
-      images: Images.find({}).fetch()
+      image: Images.findOne()
     };
   },
 
@@ -123,24 +129,20 @@ var ImagesList = ReactMeteor.createClass({
       <div className="images-wrapper">
         <div className="images">
           <header className="images-header">
-            <Countdown/>
+            <Countdown expires={this.state.image.expires}/>
           </header>
-          {this.state.images.map(function(image, i){
-            return(
-              <div key={i} className="image">
-                {moment().isAfter(this.expires) ?
-                  <p>Image expired at {image.expiration}</p>
-                :
-                  <span>
-                    <header className="image-header">
-                      <strong className="image-title">{image.name}</strong>
-                    </header>
-                    <Image link={image.link} id={image._id}/>
-                  </span>
-                }
-              </div>
-            );
-          }.bind(this))}
+            <div className="image">
+              {moment().isAfter(this.state.image.expires) ?
+                <p>Image expired at {this.state.expires}</p>
+              :
+                <span>
+                  <header className="image-header">
+                    <strong className="image-title">{this.state.image.name}</strong>
+                  </header>
+                  <Image link={this.state.image.link} id={this.state.image._id}/>
+                </span>
+              }
+            </div>
         </div>
         <button className="button button-large add-image">Add another image</button>
       </div>
