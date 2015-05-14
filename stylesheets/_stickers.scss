@@ -7,14 +7,6 @@
   top: 0;
 }
 
-.sticker__wrapper {
-  position: absolute;
-
-  &.is-selected {
-    z-index: 999;
-  }
-}
-
 .sticker {
   $size: 1.5em;
   background-color: $color-primary;
@@ -32,7 +24,6 @@
   transform: translate3d(-50%, -50%, 0);
   transition: $transition-image;
   width: $size;
-  z-index: 1;
 
   .good & {
     background-color: $color-good;
