@@ -7,22 +7,11 @@ Meteor.methods({
     Images.remove(imageId);
   },
 
-  'addPlacemark': function(args){
-    return Placemarks.insert({
+  'addSticker': function(args){
+    return Stickers.insert({
       parent: args.parent,
-      type: args.type,
       top: args.top,
       left: args.left
-    });
-  },
-
-  'addComment': function(args){
-    Comments.insert({
-      parentImage: args.parentImage,
-      parentPlacemark: args.parentPlacemark,
-      name: args.name,
-      message: args.message,
-      createdAt: args.createdAt
     });
   }
 });

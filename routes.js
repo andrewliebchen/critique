@@ -16,8 +16,7 @@ Router.map(function() {
     data: function() {
       return [
         Images.findOne(),
-        Placemarks.find({}),
-        Comments.find({})
+        Stickers.find({})
       ];
     }
   });

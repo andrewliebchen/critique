@@ -19,24 +19,17 @@ Template.image.helpers({
 });
 
 Template.image.events({
-  'click .mtr_add-placemark': function(event){
-    if(!Session.get('currentPlacemark')) {
-      // Probably only want to do this when a comment is added
-      var type = Session.get('currentPlacemarkType');
-      var showingComments = Session.get('currentPlacemark');
-      var targetOffset = $(event.target).offset();
-      var top = event.clientY - targetOffset.top + document.body.scrollTop;
-      var left = event.clientX - targetOffset.left;
+  'click .mtr_add-sticker': function(event){
+    // Probably only want to do this when a comment is added
+    var targetOffset = $(event.target).offset();
+    var top = event.clientY - targetOffset.top + document.body.scrollTop;
+    var left = event.clientX - targetOffset.left;
 
-      Meteor.call('addPlacemark', {
-        parent: this._id,
-        type: type,
-        top: top,
-        left: left
-      }, function(err, id) {
-        Session.set('currentPlacemark', id);
-      });
-    }
+    Meteor.call('addSticker', {
+      parent: this._id,
+      top: top,
+      left: left
+    });
   },
 
   'click .mtr_delete-image': function(){

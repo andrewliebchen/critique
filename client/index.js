@@ -1,2 +1,1 @@
 Session.setDefault('currentUser', null);
-
