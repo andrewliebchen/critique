@@ -10,7 +10,9 @@ class Image extends Component {
       return (
         <div>
           {image ?
-            <img src={image.url} style={{maxWidth: '100%'}}/>
+            <div className="image__container">
+              <img src={image.url} className="image__element"/>
+            </div>
           : <div>Whoops, no image</div>}
           <NewImage/>
         </div>

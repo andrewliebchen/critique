@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  font-family: "tofino", "helvetica neue", helvetica, arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.image__container {
+  position: relative;
+}
+
+.image__element {
+  max-width: 100%;
+}
