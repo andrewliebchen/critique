@@ -1,3 +1,5 @@
+@import "emoji-picker";
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -27,12 +29,21 @@ body {
   bottom: 0;
 }
 
+.pip__container {
+  position: absolute;
+  transform: translate3d(-50%, -50%, 0);
+
+  &.is-selected {
+    z-index: 9;
+  }
+}
+
 .pip {
   $size: 1rem;
   $radius: $size / 2;
   height: $size;
   width: $size;
-  position: absolute;
-  background-color: blue;
-  border-radius: 0 $radius $radius $radius;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(black, 0.3);
+  border-radius: $radius;
 }

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import { $ } from 'meteor/jquery';
 import randomToken from 'random-token';
-
+import Pip from './Pip.jsx';
 
 export default class Pips extends Component {
   constructor(props) {
@@ -20,16 +20,9 @@ export default class Pips extends Component {
         className="pips"
         onClick={this.handleAddPip.bind(this)}
         ref="pips">
-        {pips ? pips.map((pip, i) =>
-          <div
-            className="pip"
-            key={i}
-            onClick={this.handlePipClick}
-            style={{
-              left: `${pip.x}%`,
-              top: `${pip.y}%`,
-            }}/>
-        ) : null}
+        {pips && pips.map((pip, i) =>
+          <Pip key={i} pip={pip}/>
+        )}
       </div>
     );
   }
@@ -51,11 +44,6 @@ export default class Pips extends Component {
         this.setState({activePips: this.state.activePips.concat(pipId)});
       }
     });
-  }
-
-  handlePipClick(event) {
-    event.stopPropagation();
-    console.log('click');
   }
 };
 
