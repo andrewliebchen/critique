@@ -18,3 +18,20 @@ body {
 .image__element {
   max-width: 100%;
 }
+
+.pips {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.pip {
+  $size: 1rem;
+  height: $size;
+  width: $size;
+  position: absolute;
+  background-color: blue;
+  transform: translate3d(-50%, -50%, 0);
+}

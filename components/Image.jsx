@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Images } from '../api/images';
+import Pips from './Pips.jsx';
 import NewImage from './NewImage.jsx';
 
 class Image extends Component {
@@ -12,6 +13,7 @@ class Image extends Component {
           {image ?
             <div className="image__container">
               <img src={image.url} className="image__element"/>
+              <Pips imageId={image._id} pips={image.pips}/>
             </div>
           : <div>Whoops, no image</div>}
           <NewImage/>
