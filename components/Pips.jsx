@@ -39,6 +39,7 @@ export default class Pips extends Component {
       x: (event.pageX - pips.offset().left) / pipsWidth * 100,
       y: (event.pageY - pips.offset().top) / pipsHeight * 100,
       created_at: Date.now(),
+      emoji: ':grinning:',
     }, (err, success) => {
       if (success) {
         this.setState({activePips: this.state.activePips.concat(pipId)});

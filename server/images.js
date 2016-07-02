@@ -18,6 +18,7 @@ Meteor.methods({
           x: args.x,
           y: args.y,
           created_at: args.created_at,
+          emoji: args.emoji,
         }
       }
     })

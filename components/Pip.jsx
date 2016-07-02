@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
+import EmojiOne from 'emojione';
 import EmojiPicker from 'emojione-picker';
 
 export default class Pip extends Component {
@@ -7,6 +8,13 @@ export default class Pip extends Component {
     super(props);
     this.state = {
       picker: false,
+    };
+  }
+
+  renderEmoji() {
+    const emoji = this.props.pip.emoji;
+    return {
+      __html: emoji ? EmojiOne.toImage(emoji) : ''
     };
   }
 
@@ -25,7 +33,9 @@ export default class Pip extends Component {
         }}>
         <div
           className="pip"
-          onClick={this.handlePipClick.bind(this)}/>
+          onClick={this.handlePipClick.bind(this)}
+          dangerouslySetInnerHTML={this.renderEmoji()}>
+        </div>
         {this.state.picker && <EmojiPicker onChange={this.handleSelectEmoji}/>}
       </div>
     );
