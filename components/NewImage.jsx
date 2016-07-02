@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Meteor } from 'meteor/meteor';
 import ReactDOM from 'react-dom';
+import { Router } from 'react-router';
 import { Images } from '../api/images';
 
 export default class NewImage extends Component {
@@ -16,9 +18,13 @@ export default class NewImage extends Component {
     const url = ReactDOM.findDOMNode(this.refs.imageUrl).value.trim();
 
     if (url) {
-      Images.insert({
+      Meteor.call('addImage', {
         url: url,
         date: Date.now(),
+      }, (err, id) => {
+        if (id) {
+          window.location.href = `/i/${id}`;
+        }
       });
     }
 
