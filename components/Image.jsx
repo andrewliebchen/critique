@@ -5,24 +5,31 @@ import NewImage from './NewImage.jsx';
 
 class Image extends Component {
   render() {
-    const { images } = this.props;
-    return (
-      <div>
-        {images.length > 0 ? images.map((image, i) =>
-          <img key={i} src={image.url} style={{maxWidth: '100%'}}/>
-        ) : <div>No images</div>}
-        <NewImage/>
-      </div>
-    )
+    const { dataIsReady, image } = this.props;
+    if (dataIsReady) {
+      return (
+        <div>
+          {image ?
+            <img src={image.url} style={{maxWidth: '100%'}}/>
+          : <div>Whoops, no image</div>}
+          <NewImage/>
+        </div>
+      );
+    } else {
+      return <div>Loading</div>;
+    }
   }
 };
 
 Image.propTypes = {
-  images: PropTypes.array.isRequired,
+  image: PropTypes.object,
 };
 
 export default createContainer(({params}) => {
+  const dataHandle = Meteor.subscribe('image', params.id);
+  const dataIsReady = dataHandle.ready();
   return {
-    images: Images.find({_id: params.id}).fetch(),
+    dataIsReady,
+    image: dataIsReady ? Images.findOne() : null,
   };
 }, Image);
