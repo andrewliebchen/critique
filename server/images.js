@@ -14,6 +14,7 @@ Meteor.methods({
     return Images.update(args.imageId, {
       $push: {
         pips: {
+          id: args.id,
           x: args.x,
           y: args.y,
           created_at: args.created_at,
