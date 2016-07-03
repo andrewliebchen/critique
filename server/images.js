@@ -28,10 +28,16 @@ Meteor.methods({
     //> db.foo.update({"array.value" : 22}, {"$set" : {"array.$.text" : "blah"}})
     return Images.update({
       _id: args.imageId,
-      'pips.id': args.pipId,
+      'pips.id': args.pip.id,
     }, {
       $set: {
-      'pips.$': {emoji: args.emoji}
+      'pips.$': {
+        id: args.pip.id,
+        x: args.pip.x,
+        y: args.pip.y,
+        created_at: args.pip.created_at,
+        emoji: args.emoji
+      }
     }});
   },
 });

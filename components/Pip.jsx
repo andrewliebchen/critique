@@ -37,6 +37,7 @@ export default class Pip extends Component {
           onClick={this.handlePipClick.bind(this)}
           dangerouslySetInnerHTML={this.renderEmoji()}>
         </div>
+        {/* emoji picker is slooooow */}
         {this.state.picker && <EmojiPicker onChange={this.handleSelectEmoji.bind(this)}/>}
       </div>
     );
@@ -48,9 +49,10 @@ export default class Pip extends Component {
   }
 
   handleSelectEmoji(data) {
+    // How to stop emoji place underneath? Blank div?
     Meteor.call('updateEmoji', {
       imageId: this.props.imageId,
-      pipId: this.props.pip.id,
+      pip: this.props.pip,
       emoji: data.shortname,
     });
   }
