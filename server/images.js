@@ -23,4 +23,15 @@ Meteor.methods({
       }
     })
   },
+
+  updateEmoji(args) {
+    //> db.foo.update({"array.value" : 22}, {"$set" : {"array.$.text" : "blah"}})
+    return Images.update({
+      _id: args.imageId,
+      'pips.id': args.pipId,
+    }, {
+      $set: {
+      'pips.$': {emoji: args.emoji}
+    }});
+  },
 });

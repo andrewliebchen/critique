@@ -14,14 +14,14 @@ export default class Pips extends Component {
   }
 
   render() {
-    const { pips } = this.props;
+    const { pips, imageId } = this.props;
     return (
       <div
         className="pips"
         onClick={this.handleAddPip.bind(this)}
         ref="pips">
         {pips && pips.map((pip, i) =>
-          <Pip key={i} pip={pip}/>
+          <Pip key={i} pip={pip} imageId={imageId}/>
         )}
       </div>
     );

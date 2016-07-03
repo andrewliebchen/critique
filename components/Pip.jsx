@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Meteor } from 'meteor/meteor';
 import classnames from 'classnames';
 import EmojiOne from 'emojione';
 import EmojiPicker from 'emojione-picker';
@@ -36,7 +37,7 @@ export default class Pip extends Component {
           onClick={this.handlePipClick.bind(this)}
           dangerouslySetInnerHTML={this.renderEmoji()}>
         </div>
-        {this.state.picker && <EmojiPicker onChange={this.handleSelectEmoji}/>}
+        {this.state.picker && <EmojiPicker onChange={this.handleSelectEmoji.bind(this)}/>}
       </div>
     );
   }
@@ -47,10 +48,15 @@ export default class Pip extends Component {
   }
 
   handleSelectEmoji(data) {
-    console.log(data);
+    Meteor.call('updateEmoji', {
+      imageId: this.props.imageId,
+      pipId: this.props.pip.id,
+      emoji: data.shortname,
+    });
   }
 };
 
 Pip.propTypes = {
   pip: PropTypes.object,
+  imageId: PropTypes.string,
 };
