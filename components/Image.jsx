@@ -1,19 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-import { Images } from '../api/images';
-import Pips from './Pips.jsx';
+import { Images, Pips } from '../api/main';
+import PipsContainer from './PipsContainer.jsx';
 import NewImage from './NewImage.jsx';
 
 class Image extends Component {
   render() {
-    const { dataIsReady, image } = this.props;
+    const { dataIsReady, image, pips } = this.props;
     if (dataIsReady) {
       return (
         <div>
           {image ?
             <div className="image__container">
               <img src={image.url} className="image__element"/>
-              <Pips imageId={image._id} pips={image.pips}/>
+              <PipsContainer imageId={image._id} pips={pips}/>
             </div>
           : <div>Whoops, no image</div>}
           <NewImage/>
@@ -34,6 +34,7 @@ export default createContainer(({params}) => {
   const dataIsReady = dataHandle.ready();
   return {
     dataIsReady,
-    image: dataIsReady ? Images.findOne() : null,
+    image: dataIsReady ? Images.findOne(params.id) : null,
+    pips: dataIsReady ? Pips.find({imageId: params.id}).fetch() : [],
   };
 }, Image);

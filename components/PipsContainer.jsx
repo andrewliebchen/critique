@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
+import { createContainer } from 'meteor/react-meteor-data';
 import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import { $ } from 'meteor/jquery';
-import randomToken from 'random-token';
 import Pip from './Pip.jsx';
 
-export default class Pips extends Component {
+export default class PipsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,7 +14,7 @@ export default class Pips extends Component {
   }
 
   render() {
-    const { pips, imageId } = this.props;
+    const { pips, imageId, dataIsReady } = this.props;
     return (
       <div
         className="pips"
@@ -31,24 +31,22 @@ export default class Pips extends Component {
     const pips = $(ReactDOM.findDOMNode(this.refs.pips));
     const pipsWidth = pips.outerWidth();
     const pipsHeight = pips.outerHeight();
-    const pipId = randomToken(5);
 
     Meteor.call('addPip', {
       imageId: this.props.imageId,
-      id: pipId,
       x: (event.pageX - pips.offset().left) / pipsWidth * 100,
       y: (event.pageY - pips.offset().top) / pipsHeight * 100,
       created_at: Date.now(),
       emoji: ':grinning:',
-    }, (err, success) => {
-      if (success) {
-        this.setState({activePips: this.state.activePips.concat(pipId)});
+    }, (err, id) => {
+      if (id) {
+        this.setState({activePips: this.state.activePips.concat(id)});
       }
     });
   }
 };
 
-Pips.propTypes = {
+PipsContainer.propTypes = {
   imageId: PropTypes.string,
   pips: PropTypes.array,
 };

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router';
-import { Images } from '../api/images';
+import { Images } from '../api/main';
 
 export default class NewImage extends Component {
   render() {

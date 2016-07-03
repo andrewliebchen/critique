@@ -50,9 +50,9 @@ export default class Pip extends Component {
 
   handleSelectEmoji(data) {
     // How to stop emoji place underneath? Blank div?
+    const { pip } = this.props;
     Meteor.call('updateEmoji', {
-      imageId: this.props.imageId,
-      pip: this.props.pip,
+      id: pip._id,
       emoji: data.shortname,
     });
   }

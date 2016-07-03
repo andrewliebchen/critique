@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Images } from '../api/images.js';
+import { Images } from '../api/main';
 
 Meteor.methods({
   addImage(args) {
@@ -8,36 +8,5 @@ Meteor.methods({
       date: args.date,
       pips: [],
     });
-  },
-
-  addPip(args) {
-    return Images.update(args.imageId, {
-      $push: {
-        pips: {
-          id: args.id,
-          x: args.x,
-          y: args.y,
-          created_at: args.created_at,
-          emoji: args.emoji,
-        }
-      }
-    })
-  },
-
-  updateEmoji(args) {
-    //> db.foo.update({"array.value" : 22}, {"$set" : {"array.$.text" : "blah"}})
-    return Images.update({
-      _id: args.imageId,
-      'pips.id': args.pip.id,
-    }, {
-      $set: {
-      'pips.$': {
-        id: args.pip.id,
-        x: args.pip.x,
-        y: args.pip.y,
-        created_at: args.pip.created_at,
-        emoji: args.emoji
-      }
-    }});
   },
 });

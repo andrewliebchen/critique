@@ -18,7 +18,6 @@
   "description": "",
   "devDependencies": {
     "classnames": "^2.2.5",
-    "emojione-picker": "^0.3.6",
-    "random-token": "0.0.8"
+    "emojione-picker": "^0.3.6"
   }
 }
