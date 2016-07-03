@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import classnames from 'classnames';
 import EmojiOne from 'emojione';
 import EmojiPicker from 'emojione-picker';
+import { ReactPageClick } from 'react-page-click';
 
 export default class Pip extends Component {
   constructor(props) {
@@ -38,7 +39,10 @@ export default class Pip extends Component {
           dangerouslySetInnerHTML={this.renderEmoji()}>
         </div>
         {/* emoji picker is slooooow */}
-        {this.state.picker && <EmojiPicker onChange={this.handleSelectEmoji.bind(this)}/>}
+        {this.state.picker &&
+          <ReactPageClick notify={this.closePicker.bind(this)}>
+            <EmojiPicker onChange={this.handleSelectEmoji.bind(this)}/>
+          </ReactPageClick>}
       </div>
     );
   }
@@ -56,7 +60,12 @@ export default class Pip extends Component {
       emoji: data.shortname,
     });
   }
-};
+
+  closePicker(event) {
+    event.stopPropagation();
+    this.setState({picker: false});
+  }
+ };
 
 Pip.propTypes = {
   pip: PropTypes.object,
