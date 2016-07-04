@@ -14,7 +14,7 @@ class Image extends Component {
           <PipsContainer imageId={image._id} pips={pips}/>
         </div>
         <div className="image__detail">
-          <h2>{image.title}</h2>
+          {image.title && <h2>{image.title}</h2>}
         </div>
       </div>
     );
