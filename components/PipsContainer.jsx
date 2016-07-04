@@ -8,8 +8,10 @@ import Pip from './Pip.jsx';
 export default class PipsContainer extends Component {
   constructor(props) {
     super(props);
+    this.handlePickerToggle = this.handlePickerToggle.bind(this);
     this.state = {
-      activePips: [],
+      sessionPips: [],
+      picker: false,
     };
   }
 
@@ -21,7 +23,12 @@ export default class PipsContainer extends Component {
         onClick={this.handleAddPip.bind(this)}
         ref="pips">
         {pips && pips.map((pip, i) =>
-          <Pip key={i} pip={pip} imageId={imageId}/>
+          <Pip
+            key={i}
+            pip={pip}
+            imageId={imageId}
+            picker={this.state.picker === pip._id}
+            handleClick={this.handlePickerToggle}/>
         )}
       </div>
     );
@@ -40,9 +47,14 @@ export default class PipsContainer extends Component {
       emoji: '😀',
     }, (err, id) => {
       if (id) {
-        this.setState({activePips: this.state.activePips.concat(id)});
+        this.setState({sessionPips: this.state.sessionPips.concat(id)});
       }
     });
+  }
+
+  handlePickerToggle(id, event) {
+    event.stopPropagation();
+    this.setState({picker: id});
   }
 };
 
