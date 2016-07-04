@@ -1,22 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import classnames from 'classnames';
-import EmojiOne from 'emojione';
-import EmojiPicker from 'emojione-picker';
 import { ReactPageClick } from 'react-page-click';
+import EmojiPicker from './EmojiPicker.jsx';
 
 export default class Pip extends Component {
   constructor(props) {
     super(props);
     this.state = {
       picker: false,
-    };
-  }
-
-  renderEmoji() {
-    const emoji = this.props.pip.emoji;
-    return {
-      __html: emoji ? EmojiOne.toImage(emoji) : ''
     };
   }
 
@@ -35,14 +27,19 @@ export default class Pip extends Component {
         }}>
         <div
           className="pip"
-          onClick={this.handlePipClick.bind(this)}
-          dangerouslySetInnerHTML={this.renderEmoji()}>
+          onClick={this.handlePipClick.bind(this)}>
+          <span className="emoji">{pip.emoji}</span>
         </div>
-        {/* emoji picker is slooooow */}
         {this.state.picker &&
-          <ReactPageClick notify={this.closePicker.bind(this)}>
-            <EmojiPicker onChange={this.handleSelectEmoji.bind(this)}/>
-          </ReactPageClick>}
+          <EmojiPicker onChange={(emoji) => {
+            Meteor.call('updateEmoji', {
+              id: this.props.pip._id,
+              emoji: emoji,
+            }, (err, success) => {
+              this.setState({picker: false});
+            });
+          }}/>
+          }
       </div>
     );
   }
@@ -50,15 +47,6 @@ export default class Pip extends Component {
   handlePipClick(event) {
     event.stopPropagation();
     this.setState({picker: true});
-  }
-
-  handleSelectEmoji(data) {
-    // How to stop emoji place underneath? Blank div?
-    const { pip } = this.props;
-    Meteor.call('updateEmoji', {
-      id: pip._id,
-      emoji: data.shortname,
-    });
   }
 
   closePicker(event) {

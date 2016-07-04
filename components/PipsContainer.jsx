@@ -37,7 +37,7 @@ export default class PipsContainer extends Component {
       x: (event.pageX - pips.offset().left) / pipsWidth * 100,
       y: (event.pageY - pips.offset().top) / pipsHeight * 100,
       created_at: Date.now(),
-      emoji: ':grinning:',
+      emoji: '😀',
     }, (err, id) => {
       if (id) {
         this.setState({activePips: this.state.activePips.concat(id)});

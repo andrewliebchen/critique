@@ -19,6 +19,8 @@
   "description": "",
   "devDependencies": {
     "classnames": "^2.2.5",
-    "emojione-picker": "^0.3.6"
+    "emoji.json": "^1.1.1",
+    "emojione-picker": "^0.3.6",
+    "lodash": "^4.13.1"
   }
 }

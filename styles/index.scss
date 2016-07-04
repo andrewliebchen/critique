@@ -1,3 +1,5 @@
+$brand-primary: blue;
+
 @import "emoji-picker";
 
 * {
@@ -47,12 +49,16 @@ body {
   background-color: white;
   box-shadow: 0 2px 5px rgba(black, 0.3);
   border-radius: $radius;
-  border: 2px solid white;
   cursor: pointer;
+  position: absolute;
+  transform: translate3d(-50%, -50%, 0);
 }
 
-.emojione {
-  display: block;
-  max-height: 100%;
-  max-width: 100%;
+.emoji {
+  font-size: 1.25rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: 1px;
+  transform: translate3d(-50%, -50%, 0);
 }
