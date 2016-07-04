@@ -5,6 +5,7 @@ Meteor.methods({
   addImage(args) {
     return Images.insert({
       url: args.url,
+      title: args.title,
       date: args.date,
       pips: [],
     });

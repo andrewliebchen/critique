@@ -5,17 +5,27 @@ import PipsContainer from './PipsContainer.jsx';
 import NewImage from './NewImage.jsx';
 
 class Image extends Component {
+  renderImage() {
+    const { dataIsReady, image, pips } = this.props;
+    return (
+      <div>
+        <div className="image__container">
+          <img src={image.url} className="image__element"/>
+          <PipsContainer imageId={image._id} pips={pips}/>
+        </div>
+        <div className="image__detail">
+          <h2>{image.title}</h2>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     const { dataIsReady, image, pips } = this.props;
     if (dataIsReady) {
       return (
         <div>
-          {image ?
-            <div className="image__container">
-              <img src={image.url} className="image__element"/>
-              <PipsContainer imageId={image._id} pips={pips}/>
-            </div>
-          : <div>Whoops, no image</div>}
+          {image ? this.renderImage() : <div>Whoops, no image</div>}
           <NewImage/>
         </div>
       );
