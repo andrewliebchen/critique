@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import classnames from 'classnames';
-import { ReactPageClick } from 'react-page-click';
 import EmojiPicker from './EmojiPicker.jsx';
 
 export default class Pip extends Component {
   render() {
-    const { pip, picker, handleClick } = this.props;
+    const { pip, picker, handleClick, closePicker } = this.props;
     const containerClassName = classnames({
       'pip__container': true,
       'is-selected': picker,
@@ -27,8 +26,7 @@ export default class Pip extends Component {
               id: this.props.pip._id,
               emoji: emoji,
             });
-          }}/>
-          }
+          }}/>}
       </div>
     );
   }

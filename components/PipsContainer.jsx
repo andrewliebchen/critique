@@ -9,10 +9,25 @@ export default class PipsContainer extends Component {
   constructor(props) {
     super(props);
     this.handlePickerToggle = this.handlePickerToggle.bind(this);
+    this._handleEscKey = this._handleEscKey.bind(this);
     this.state = {
       sessionPips: [],
       picker: false,
     };
+  }
+
+  _handleEscKey(event){
+    if (event.keyCode === 27) {
+      this.setState({picker: false});
+    }
+  }
+
+  componentWillMount() {
+    document.addEventListener('keydown', this._handleEscKey, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this._handleEscKey, false);
   }
 
   render() {
@@ -39,17 +54,21 @@ export default class PipsContainer extends Component {
     const pipsWidth = pips.outerWidth();
     const pipsHeight = pips.outerHeight();
 
-    Meteor.call('addPip', {
-      imageId: this.props.imageId,
-      x: (event.pageX - pips.offset().left) / pipsWidth * 100,
-      y: (event.pageY - pips.offset().top) / pipsHeight * 100,
-      created_at: Date.now(),
-      emoji: '😀',
-    }, (err, id) => {
-      if (id) {
-        this.setState({sessionPips: this.state.sessionPips.concat(id)});
-      }
-    });
+    if (this.state.picker) {
+      this.setState({picker: false});
+    } else {
+      Meteor.call('addPip', {
+        imageId: this.props.imageId,
+        x: (event.pageX - pips.offset().left) / pipsWidth * 100,
+        y: (event.pageY - pips.offset().top) / pipsHeight * 100,
+        created_at: Date.now(),
+        emoji: '😀',
+      }, (err, id) => {
+        if (id) {
+          this.setState({sessionPips: this.state.sessionPips.concat(id)});
+        }
+      });
+    }
   }
 
   handlePickerToggle(id, event) {
