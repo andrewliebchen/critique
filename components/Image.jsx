@@ -15,29 +15,32 @@ class Image extends Component {
     };
   }
 
-  renderImage() {
+  render() {
     const { dataIsReady, image, pips } = this.props;
-
-    if (image.expires_at > 0 && Date.now() > image.expires_at) {
-      return <div>Image is expired</div>;
-    } else {
+    const lifespanEllapsed = moment(image.expires_at).subtract(Date.now());
+    const lifespanTotal = moment(image.expires_at).subtract(image.created_at);
+    const lifespan = lifespanEllapsed / lifespanTotal;
+    if (dataIsReady) {
       return (
         <div>
-          <div className="image__container">
-            <img src={image.url} className="image__element"/>
-            <PipsContainer imageId={image._id} pips={pips} showPips={this.state.pips}/>
-          </div>
+          {image.expires_at > 0 && lifespan > 0 ?
+            <div className="image__container">
+              <img src={image.url} className="image__element"/>
+              <PipsContainer imageId={image._id} pips={pips} showPips={this.state.pips}/>
+            </div>
+          : <div className="image__expired">Image is expired</div>}
           <Container>
             <Flex align="center">
-              <Box>
-                <Donut
-                  color="primary"
-                  size={64}
-                  strokeWidth={8}
-                  value={0.5}/>
-              </Box>
+              {image.expires_at > 0 &&
+                <Box>
+                  <Donut
+                    color="primary"
+                    size={64}
+                    strokeWidth={8}
+                    value={lifespan}/>
+                </Box>}
               <Box px={2}>
-                <Heading>{image.title}</Heading>
+                <Heading href={image.url}>{image.title ? image.title : image.url}</Heading>
                 Image expires {moment(image.expires_at).fromNow()} at {moment(image.expires_at).format()}
               </Box>
               <Box>
@@ -49,44 +52,8 @@ class Image extends Component {
                 </div>
               </Box>
             </Flex>
-            {/*
-            {image.title &&
-              <SectionHeader
-                heading={image.title}
-                description={image.url}/>}
-            {image.expires_at > 0 ?
-              <div>
-                <Donut
-                  color="primary"
-                  size={64}
-                  strokeWidth={8}
-                  value={0.5}/>
-
-              </div>
-            : null }
-            */}
           </Container>
         </div>
-      );
-    }
-  }
-
-  render() {
-    const { dataIsReady, image, pips } = this.props;
-    if (dataIsReady) {
-      return (
-        <div>
-          {image ? this.renderImage() : <div>Whoops, no image</div>}
-          {/*
-            <Container>
-            <Panel>
-              <PanelHeader>Critique a new image</PanelHeader>
-              <NewImage/>
-            </Panel>
-          </Container>
-        */}
-        </div>
-
       );
     } else {
       return <div>Loading</div>;
