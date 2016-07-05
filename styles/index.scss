@@ -1,18 +1,14 @@
-$brand-primary: blue;
-
 @import "emoji-picker";
 
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
-html,
 body {
-  font-family: "tofino", "helvetica neue", helvetica, arial, sans-serif;
-  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.5;
+  color: #111;
+  background-color: #fff;
 }
 
 .image__container {

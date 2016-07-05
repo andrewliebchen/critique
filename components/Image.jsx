@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import moment from 'moment';
+import { Container, Donut, Section, Heading, SectionHeader, Panel, PanelHeader, Switch } from 'rebass';
+import { Flex, Box } from 'reflexbox';
 import { Images, Pips } from '../api/main';
 import PipsContainer from './PipsContainer.jsx';
 import NewImage from './NewImage.jsx';
@@ -18,14 +20,42 @@ class Image extends Component {
             <img src={image.url} className="image__element"/>
             <PipsContainer imageId={image._id} pips={pips}/>
           </div>
-          <div className="image__detail">
-            {image.title && <h2>{image.title}</h2>}
+          <Container>
+            <Flex align="center">
+              <Box>
+                <Donut
+                  color="primary"
+                  size={64}
+                  strokeWidth={8}
+                  value={0.5}/>
+              </Box>
+              <Box px={2}>
+                <Heading>{image.title}</Heading>
+                Image expires {moment(image.expires_at).fromNow()} at {moment(image.expires_at).format()}
+              </Box>
+              <Box>
+                <div className="pip-switch">
+                  <Switch/> Display pips
+                </div>
+              </Box>
+            </Flex>
+            {/*
+            {image.title &&
+              <SectionHeader
+                heading={image.title}
+                description={image.url}/>}
             {image.expires_at > 0 ?
               <div>
-                Image expires {moment(image.expires_at).fromNow()} at {moment(image.expires_at).format()}
+                <Donut
+                  color="primary"
+                  size={64}
+                  strokeWidth={8}
+                  value={0.5}/>
+
               </div>
             : null }
-          </div>
+            */}
+          </Container>
         </div>
       );
     }
@@ -37,8 +67,16 @@ class Image extends Component {
       return (
         <div>
           {image ? this.renderImage() : <div>Whoops, no image</div>}
-          <NewImage/>
+          {/*
+            <Container>
+            <Panel>
+              <PanelHeader>Critique a new image</PanelHeader>
+              <NewImage/>
+            </Panel>
+          </Container>
+        */}
         </div>
+
       );
     } else {
       return <div>Loading</div>;
