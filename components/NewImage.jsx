@@ -8,7 +8,7 @@ export default class NewImage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lifespan: 37,
+      lifespan: 0,
     };
   }
   render() {
@@ -27,11 +27,11 @@ export default class NewImage extends Component {
           <label>Lifespan</label>
           <input
             type="range"
-            min="1"
-            max="37"
+            min="0"
+            max="36"
             onChange={this.handleLifespan.bind(this)}
             defaultValue={lifespan}/>
-          <span>{lifespan === 37 ? 'Forever' : `${lifespan} hours`}</span>
+          <span>{lifespan === 0 ? 'Forever' : `${lifespan} hours`}</span>
         </div>
         <input type="submit" value="Create"/>
       </form>
@@ -45,14 +45,16 @@ export default class NewImage extends Component {
 
   handleAddImage(event) {
     event.preventDefault();
+    const { lifespan } = this.state;
     const url = ReactDOM.findDOMNode(this.refs.imageUrl).value.trim();
     const title = ReactDOM.findDOMNode(this.refs.imageTitle).value.trim();
+    const created_at = Date.now();
     if (url) {
       Meteor.call('addImage', {
         url: url,
         title: title,
-        lifespan: this.state.lifespan,
-        date: Date.now(),
+        created_at: created_at,
+        expires_at: lifespan > 0 ? created_at + (lifespan * 3600000) : false,
       }, (err, id) => {
         if (id) {
           window.location.href = `/i/${id}`;

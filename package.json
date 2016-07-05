@@ -21,6 +21,7 @@
     "emoji.json": "^1.1.1",
     "emojione-picker": "^0.3.6",
     "lodash": "^4.13.1",
+    "moment": "^2.14.1",
     "react-page-click": "^3.0.0"
   }
 }
