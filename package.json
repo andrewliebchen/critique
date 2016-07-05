@@ -22,6 +22,7 @@
     "emojione-picker": "^0.3.6",
     "lodash": "^4.13.1",
     "moment": "^2.14.1",
-    "react-page-click": "^3.0.0"
+    "react-page-click": "^3.0.0",
+    "rebass": "^0.3.0"
   }
 }
