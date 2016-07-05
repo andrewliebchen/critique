@@ -31,13 +31,13 @@ export default class PipsContainer extends Component {
   }
 
   render() {
-    const { pips, imageId, dataIsReady } = this.props;
+    const { pips, imageId, dataIsReady, showPips } = this.props;
     return (
       <div
         className="pips"
         onClick={this.handleAddPip.bind(this)}
         ref="pips">
-        {pips && pips.map((pip, i) =>
+        {pips && showPips && pips.map((pip, i) =>
           <Pip
             key={i}
             pip={pip}
@@ -50,11 +50,13 @@ export default class PipsContainer extends Component {
   }
 
   handleAddPip(event) {
+    const { picker, showPips } = this.state;
     const pips = $(ReactDOM.findDOMNode(this.refs.pips));
     const pipsWidth = pips.outerWidth();
     const pipsHeight = pips.outerHeight();
 
-    if (this.state.picker) {
+    if (picker || !showPips) {
+      // Don't add a pip if the picker is open, or pips are hidden
       this.setState({picker: false});
     } else {
       Meteor.call('addPip', {
@@ -80,4 +82,5 @@ export default class PipsContainer extends Component {
 PipsContainer.propTypes = {
   imageId: PropTypes.string,
   pips: PropTypes.array,
+  showPips: PropTypes.bool,
 };

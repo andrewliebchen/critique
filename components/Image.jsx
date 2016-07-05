@@ -8,6 +8,13 @@ import PipsContainer from './PipsContainer.jsx';
 import NewImage from './NewImage.jsx';
 
 class Image extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pips: true,
+    };
+  }
+
   renderImage() {
     const { dataIsReady, image, pips } = this.props;
 
@@ -18,7 +25,7 @@ class Image extends Component {
         <div>
           <div className="image__container">
             <img src={image.url} className="image__element"/>
-            <PipsContainer imageId={image._id} pips={pips}/>
+            <PipsContainer imageId={image._id} pips={pips} showPips={this.state.pips}/>
           </div>
           <Container>
             <Flex align="center">
@@ -35,7 +42,10 @@ class Image extends Component {
               </Box>
               <Box>
                 <div className="pip-switch">
-                  <Switch/> Display pips
+                  <Switch
+                    checked={this.state.pips}
+                    onClick={this.handlePipsToggle.bind(this)}/>
+                  Display pips
                 </div>
               </Box>
             </Flex>
@@ -81,6 +91,10 @@ class Image extends Component {
     } else {
       return <div>Loading</div>;
     }
+  }
+
+  handlePipsToggle() {
+    this.setState({pips: !this.state.pips});
   }
 };
 
