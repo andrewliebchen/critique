@@ -10,4 +10,8 @@ Meteor.methods({
       expires_at: args.expires_at,
     });
   },
+
+  deleteImage(id) {
+    return Images.remove(id);
+  }
 });

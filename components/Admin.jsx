@@ -13,10 +13,10 @@ class Admin extends Component {
         <a href={image.url}>View image</a>,
         moment(image.created_at).format(),
         moment(image.expires_at).format(),
-        <ButtonOutline>Delete</ButtonOutline>,
+        <ButtonOutline onClick={this.handleImageDelete.bind(null, image._id)}>Delete</ButtonOutline>,
       ]);
     });
-    console.log(imagesData);
+
     return (
       <Container>
         <Section>
@@ -27,6 +27,10 @@ class Admin extends Component {
         </Section>
       </Container>
     );
+  }
+
+  handleImageDelete(id) {
+    Meteor.call('deleteImage', id);
   }
 };
 
