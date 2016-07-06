@@ -40,7 +40,7 @@ class Image extends Component {
               imageId={image._id}
               pips={pips}
               showPips={this.state.pips}
-              canAdd={image.expires_at <= 0}/>
+              canAdd={isActive}/>
           </div>
           <Container>
             <Flex align="center">
