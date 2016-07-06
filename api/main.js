@@ -10,6 +10,10 @@ if (Meteor.isServer) {
       Pips.find({imageId: id})
     ];
   });
+
+  Meteor.publish('admin', function adminPublication() {
+    return Images.find({})
+  });
 }
 
-export { Images, Pips };
+export { Images, Pips, Admin };
