@@ -7,7 +7,7 @@ import {
   Container,
   Divider,
   Input,
-  Slider, 
+  Slider,
 } from 'rebass';
 import moment from 'moment';
 import { Images } from '../api/main';
@@ -23,20 +23,23 @@ export default class NewImage extends Component {
   }
 
   render() {
-    const { lifespan } = this.state;
+    const { url, title, lifespan } = this.state;
     return (
       <Container>
-        <form onSubmit={this.handleAddImage.bind(this)}>
+        <form>
+          <Button onClick={this.handleDropbox.bind(this)}>Dropbox</Button>
           <Input
             type="url"
             label="Dropbox URL"
             name="imageUrl"
+            value={url}
             placeholder="Image URL"
             onChange={this.handleUrlChange.bind(this)}/>
           <Input
             type="text"
             label="Title"
             name="imageTitle"
+            value={title}
             placeholder="Awesome design"
             onChange={this.handleTitleChange.bind(this)}/>
           <Slider
@@ -52,6 +55,23 @@ export default class NewImage extends Component {
         </form>
       </Container>
     );
+  }
+
+  handleDropbox(event) {
+    event.preventDefault();
+    Dropbox.choose({
+      linkType: 'direct',
+      multiselect: false,
+      extensions: ['.png', '.jpg', '.gif'],
+      success: (files) => {
+        files.forEach((file) => {
+          this.setState({
+            url: file.link,
+            title: file.name,
+          });
+        });
+      },
+    });
   }
 
   handleUrlChange(event) {
