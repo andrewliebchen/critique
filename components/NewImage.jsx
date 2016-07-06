@@ -5,7 +5,6 @@ import { Router } from 'react-router';
 import {
   Button,
   Container,
-  Divider,
   Input,
   Slider,
 } from 'rebass';
@@ -30,7 +29,7 @@ export default class NewImage extends Component {
           <Button onClick={this.handleDropbox.bind(this)}>Dropbox</Button>
           <Input
             type="url"
-            label="Dropbox URL"
+            label="Image URL"
             name="imageUrl"
             value={url}
             placeholder="Image URL"
@@ -50,7 +49,6 @@ export default class NewImage extends Component {
             onChange={this.handleLifespan.bind(this)}
             defaultValue={lifespan}
             fill/>
-          <Divider/>
           <Button onClick={this.handleAddImage.bind(this)}>Create</Button>
         </form>
       </Container>

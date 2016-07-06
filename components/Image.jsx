@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-import moment from 'moment';
 import {
   ButtonOutline,
   Checkbox,
@@ -10,6 +9,7 @@ import {
   Section,
 } from 'rebass';
 import { Flex, Box } from 'reflexbox';
+import moment from 'moment';
 import truncate from 'truncate';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { Images, Pips } from '../api/main';
@@ -31,29 +31,36 @@ class Image extends Component {
       const lifespanEllapsed = moment(image.expires_at).subtract(Date.now());
       const lifespanTotal = moment(image.expires_at).subtract(image.created_at);
       const lifespan = lifespanEllapsed / lifespanTotal;
+      const isActive = lifespan > 0;
       return (
         <div>
-          {image.expires_at > 0 && lifespan > 0 ?
-            <div className="image__container">
-              <img src={image.url} className="image__element"/>
-              <PipsContainer imageId={image._id} pips={pips} showPips={this.state.pips}/>
-            </div>
-          : <div className="image__expired">Image is expired</div>}
+          <div className="image__container">
+            <img src={image.url} className="image__element"/>
+            <PipsContainer
+              imageId={image._id}
+              pips={pips}
+              showPips={this.state.pips}
+              canAdd={image.expires_at <= 0}/>
+          </div>
           <Container>
             <Flex align="center">
               {image.expires_at > 0 &&
                 <Box>
                   <Donut
-                    color="primary"
+                    color={isActive ? 'primary' : 'error'}
                     size={64}
                     strokeWidth={8}
-                    value={1 - lifespan}/>
+                    value={isActive ? 1 - lifespan : 1}/>
                 </Box>}
               <Box px={2} auto>
                 <Heading href={image.url}>
                   {image.title ? image.title : truncate(image.url, 8)}
                 </Heading>
-                Expires {moment(image.expires_at).fromNow()} at {moment(image.expires_at).format('h:mma [on] dddd MMM Do')}
+                {image.expires_at > 0 ?
+                  <span>
+                    {isActive ? 'Expires' : 'Expired'} {moment(image.expires_at).fromNow()} at {moment(image.expires_at).format('h:mma [on] dddd MMM Do')}
+                  </span>
+                : <span>Sweet, image doesn't expire</span>}
               </Box>
               <Box>
                 <Checkbox

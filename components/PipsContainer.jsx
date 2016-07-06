@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import ReactDOM from 'react-dom';
+import classnames from 'classnames';
 import { Meteor } from 'meteor/meteor';
 import { $ } from 'meteor/jquery';
 import Pip from './Pip.jsx';
@@ -31,10 +32,14 @@ export default class PipsContainer extends Component {
   }
 
   render() {
-    const { pips, imageId, dataIsReady, showPips } = this.props;
+    const { pips, imageId, dataIsReady, showPips, canAdd } = this.props;
+    const pipsClassName = classnames({
+      'pips': true,
+      'can-add': canAdd,
+    });
     return (
       <div
-        className="pips"
+        className={pipsClassName}
         onClick={this.handleAddPip.bind(this)}
         ref="pips">
         {pips && showPips && pips.map((pip, i) =>
@@ -54,8 +59,8 @@ export default class PipsContainer extends Component {
     const pipsWidth = pips.outerWidth();
     const pipsHeight = pips.outerHeight();
 
-    if (!this.props.showPips || this.state.picker) {
-      // Don't add a pip if the picker is open, or pips are hidden
+    if (!this.props.showPips || this.state.picker || !this.props.canAdd) {
+      // Don't add a pip if the picker is open, or pips are hidden, or image is expired
       this.setState({picker: false});
     } else {
       Meteor.call('addPip', {
@@ -82,4 +87,5 @@ PipsContainer.propTypes = {
   imageId: PropTypes.string,
   pips: PropTypes.array,
   showPips: PropTypes.bool,
+  canAdd: PropTypes.bool,
 };

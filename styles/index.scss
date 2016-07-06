@@ -32,7 +32,10 @@ body {
   right: 0;
   left: 0;
   bottom: 0;
-  cursor: crosshair;
+
+  &.can-add {
+    cursor: crosshair;
+  }
 }
 
 .pip__container {
