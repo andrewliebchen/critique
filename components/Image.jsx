@@ -74,7 +74,7 @@ class Image extends Component {
         </div>
       );
     } else {
-      return <div>Loading</div>;
+      return <span className="loader">Loading...</span>;
     }
   }
 
