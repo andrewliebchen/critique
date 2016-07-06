@@ -50,12 +50,11 @@ export default class PipsContainer extends Component {
   }
 
   handleAddPip(event) {
-    const { picker, showPips } = this.state;
     const pips = $(ReactDOM.findDOMNode(this.refs.pips));
     const pipsWidth = pips.outerWidth();
     const pipsHeight = pips.outerHeight();
 
-    if (picker || !showPips) {
+    if (!this.props.showPips || this.state.picker) {
       // Don't add a pip if the picker is open, or pips are hidden
       this.setState({picker: false});
     } else {

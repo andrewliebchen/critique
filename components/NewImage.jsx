@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router';
-import { Button, Container, Input, Slider } from 'rebass';
+import {
+  Button,
+  Container,
+  Divider,
+  Input,
+  Slider, 
+} from 'rebass';
+import moment from 'moment';
 import { Images } from '../api/main';
 
 export default class NewImage extends Component {
@@ -14,7 +21,7 @@ export default class NewImage extends Component {
       lifespan: 0,
     };
   }
-  
+
   render() {
     const { lifespan } = this.state;
     return (
@@ -33,13 +40,14 @@ export default class NewImage extends Component {
             placeholder="Awesome design"
             onChange={this.handleTitleChange.bind(this)}/>
           <Slider
-            label="Image lifespan"
+            label={lifespan > 0 ? `Expires in ${lifespan} hours at ${moment().add(lifespan).fromNow()} at ${moment().add(lifespan).format('h:mma [on] dddd MMM Do')}` : 'Never expires'}
             name="lifespan"
             min="0"
             max="36"
             onChange={this.handleLifespan.bind(this)}
-            defaultValue={lifespan}/>
-          <p>{lifespan > 0 ? `${lifespan} hours` : 'Forever'}</p>
+            defaultValue={lifespan}
+            fill/>
+          <Divider/>
           <Button onClick={this.handleAddImage.bind(this)}>Create</Button>
         </form>
       </Container>
