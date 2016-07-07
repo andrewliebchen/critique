@@ -30,7 +30,9 @@ class Admin extends Component {
   }
 
   handleImageDelete(id) {
-    Meteor.call('deleteImage', id);
+    if (window.confirm('Are you sure you want to delete this image?')) {
+      Meteor.call('deleteImage', id);
+    }
   }
 };
 
