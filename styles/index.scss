@@ -55,9 +55,18 @@ body {
   background-color: white;
   box-shadow: 0 2px 5px rgba(black, 0.3);
   border-radius: $radius;
-  cursor: pointer;
+  cursor: default;
   position: absolute;
   transform: translate3d(-50%, -50%, 0);
+
+  .is-adding-pips & {
+    filter: grayscale(100%);
+  }
+
+  .is-current & {
+    filter: grayscale(0%);
+    cursor: pointer;
+  }
 }
 
 .emoji {

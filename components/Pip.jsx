@@ -5,10 +5,11 @@ import EmojiPicker from './EmojiPicker.jsx';
 
 export default class Pip extends Component {
   render() {
-    const { pip, picker, handleClick, closePicker } = this.props;
+    const { pip, picker, handleClick, closePicker, currentSession } = this.props;
     const containerClassName = classnames({
       'pip__container': true,
       'is-selected': picker,
+      'is-current': currentSession,
     });
     return (
       <div
@@ -20,7 +21,7 @@ export default class Pip extends Component {
         <div className="pip" onClick={handleClick.bind(null, pip._id)}>
           <span className="emoji">{pip.emoji}</span>
         </div>
-        {picker &&
+        {picker && currentSession &&
           <EmojiPicker onChange={(emoji) => {
             Meteor.call('updateEmoji', {
               id: this.props.pip._id,
@@ -37,4 +38,5 @@ Pip.propTypes = {
   imageId: PropTypes.string,
   picker: PropTypes.bool,
   handleClick: PropTypes.func,
+  currentSession: PropTypes.bool,
 };

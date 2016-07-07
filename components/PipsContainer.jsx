@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import { Meteor } from 'meteor/meteor';
 import { $ } from 'meteor/jquery';
+import _ from 'lodash';
 import Pip from './Pip.jsx';
 
 export default class PipsContainer extends Component {
@@ -36,6 +37,7 @@ export default class PipsContainer extends Component {
     const pipsClassName = classnames({
       'pips': true,
       'can-add': canAdd,
+      'is-adding-pips': this.state.sessionPips.length > 0
     });
     return (
       <div
@@ -48,7 +50,8 @@ export default class PipsContainer extends Component {
             pip={pip}
             imageId={imageId}
             picker={this.state.picker === pip._id}
-            handleClick={this.handlePickerToggle}/>
+            handleClick={this.handlePickerToggle}
+            currentSession={_.includes(this.state.sessionPips, pip._id)}/>
         )}
       </div>
     );
