@@ -11,6 +11,13 @@ body {
   background-color: #fff;
 }
 
+.disabled {
+  button {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
 .loader {
   position: fixed;
   top: 50%;
@@ -48,16 +55,10 @@ body {
 }
 
 .pip {
-  $size: 2rem;
-  $radius: $size / 2;
-  height: $size;
-  width: $size;
-  background-color: white;
-  box-shadow: 0 2px 5px rgba(black, 0.3);
-  border-radius: $radius;
   cursor: default;
   position: absolute;
   transform: translate3d(-50%, -50%, 0);
+  text-shadow: 0 3px 10px rgba(black, 0.3);
 
   .is-adding-pips & {
     filter: grayscale(100%);
@@ -70,10 +71,9 @@ body {
 }
 
 .emoji {
-  font-size: 1.25rem;
+  font-size: 2rem;
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-top: 1px;
   transform: translate3d(-50%, -50%, 0);
 }
