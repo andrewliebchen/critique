@@ -6,9 +6,8 @@ import {
   Container,
   Donut,
   Heading,
-  Section,
-  InlineForm,
 } from 'rebass';
+import { Meteor } from 'meteor/meteor';
 import { Flex, Box } from 'reflexbox';
 import moment from 'moment';
 import truncate from 'truncate';
@@ -92,7 +91,7 @@ class Image extends Component {
   handleCopy() {
     this.setState({copied: true});
   }
-};
+}
 
 Image.propTypes = {
   image: PropTypes.object,

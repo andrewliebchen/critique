@@ -108,6 +108,7 @@ export default class NewImage extends Component {
         title: title,
         created_at: created_at,
         expires_at: lifespan > 0 ? created_at + (lifespan * 3600000) : false,
+        token: this.props.params.id,
       }, (err, id) => {
         if (id) {
           window.location.href = `/i/${id}`;

@@ -9,6 +9,7 @@ import {
   Table,
  } from 'rebass';
 import { Meteor } from 'meteor/meteor';
+import _ from 'lodash';
 import { Images, Tokens } from '../api/main';
 import moment from 'moment';
 
@@ -21,20 +22,22 @@ class Admin extends Component {
   }
 
   render() {
+    const { images, tokens } = this.props;
     const imagesData = [];
     const tokensData = [];
 
-    this.props.images.map((image) => {
+    images.map((image) => {
       imagesData.push([
         <strong><a href={`/i/${image._id}`}>{image.title}</a></strong>,
         <a href={image.url}>View image</a>,
         moment(image.created_at).format(),
         moment(image.expires_at).format(),
+        tokens && image.token ? _.filter(this.props.tokens, {_id: image.token})[0].recipient : '',
         <ButtonOutline theme="error" onClick={this.handleImageDelete.bind(null, image._id)}>Delete</ButtonOutline>,
       ]);
     });
 
-    this.props.tokens.map((token) => {
+    tokens.map((token) => {
       tokensData.push([
         <strong><a href={`/t/${token._id}`}>{token._id}</a></strong>,
         token.recipient,
@@ -48,7 +51,7 @@ class Admin extends Component {
         <Section>
           <SectionHeader heading="Images"/>
             <Table
-              headings={['Title', 'Image URL', 'Created at', 'Expires', '']}
+              headings={['Title', 'Image URL', 'Created at', 'Expires', 'Recipient', '']}
               data={imagesData}/>
           </Section>
         <Section>
