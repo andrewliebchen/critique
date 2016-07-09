@@ -21,7 +21,6 @@ class Image extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: null,
       copied: false,
       pips: true,
     };
@@ -55,19 +54,9 @@ class Image extends Component {
                     value={isActive ? 1 - lifespan : 1}/>
                 </Box>}
               <Box px={2} auto>
-                {!this.state.title ?
-                  <span onClick={this.handleToggleSaveTitle.bind(this)}>
-                    <Heading href={image.url}>
-                      {image.title ? image.title : truncate(image.url, 8)}
-                    </Heading>
-                  </span>
-                :
-                  <InlineForm
-                    buttonLabel="Save"
-                    label="InlineForm"
-                    name="imageTitle"
-                    onChange={this.handleChangeTitle.bind(this)}
-                    onClick={this.handleSaveTitle.bind(this)}/>}
+                <Heading href={image.url}>
+                  {image.title ? image.title : truncate(image.url, 8)}
+                </Heading>
                 {image.expires_at > 0 ?
                   <span>
                     {isActive ? 'Expires' : 'Expired'} {moment(image.expires_at).fromNow()} at {moment(image.expires_at).format('h:mma [on] dddd MMM Do')}
@@ -95,24 +84,6 @@ class Image extends Component {
     } else {
       return <span className="loader">Loading...</span>;
     }
-  }
-
-  handleToggleSaveTitle() {
-    this.setState({title: true});
-  }
-
-  handleChangeTitle(event) {
-    this.setState({title: event.target.value});
-  }
-
-  handleSaveTitle(event) {
-    event.preventDefault();
-    Meteor.call('updateTitle', {
-      id: this.props.image._id,
-      title: this.state.title,
-    }, (error, success) => {
-      this.setState({title: null});
-    });
   }
 
   handlePipsToggle() {

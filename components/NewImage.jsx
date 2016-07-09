@@ -50,8 +50,15 @@ export default class NewImage extends Component {
               <a onClick={this.handleRemoveImage.bind(this)}>Remove</a>
             </Text>
           </Card>}
+        <Input
+          type="text"
+          label="Title"
+          name="imageTitle"
+          value={title}
+          placeholder="Awesome design"
+          onChange={this.handleTitleChange.bind(this)}/>
         <Slider
-          label={lifespan > 0 ? `Expires in ${lifespan} hours at ${moment().add(lifespan).fromNow()} at ${moment().add(lifespan).format('h:mma [on] dddd MMM Do')}` : 'Never expires'}
+          label={lifespan > 0 ? `Expires in ${lifespan} hour${lifespan > 1 ? 's' : ''} at ${moment().add(lifespan, 'hour').format('h:mma [on] dddd MMM Do')}` : 'Never expires'}
           name="lifespan"
           min="0"
           max="36"
@@ -86,6 +93,10 @@ export default class NewImage extends Component {
         })
       }
     });
+  }
+
+  handleTitleChange(event) {
+    this.setState({title: event.target.value})
   }
 
   handleRemoveImage() {
