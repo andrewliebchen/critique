@@ -4,19 +4,13 @@ import ReactDOM from 'react-dom';
 import { Router } from 'react-router';
 import {
   Button,
-  ButtonOutline,
-  Container,
   Card,
   CardImage,
+  Container,
+  Heading,
   Input,
   Slider,
-  Panel,
-  PanelHeader,
   Text,
-  Section,
-  Divider,
-  Heading,
-  PanelFooter,
 } from 'rebass';
 import moment from 'moment';
 import Dropzone from 'react-dropzone-es6';
