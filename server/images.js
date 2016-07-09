@@ -11,7 +11,15 @@ Meteor.methods({
     });
   },
 
+  updateTitle(args) {
+    return Images.update(args.id, {
+      $set: {
+        title: args.title,
+      },
+    });
+  },
+
   deleteImage(id) {
     return Images.remove(id);
-  }
+  },
 });
