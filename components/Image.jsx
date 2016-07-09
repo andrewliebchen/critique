@@ -31,7 +31,7 @@ class Image extends Component {
       const lifespanEllapsed = moment(image.expires_at).subtract(Date.now());
       const lifespanTotal = moment(image.expires_at).subtract(image.created_at);
       const lifespan = lifespanEllapsed / lifespanTotal;
-      const isActive = lifespan > 0;
+      const isActive = lifespan > 0 || !image.expires_at;
       return (
         <div>
           <div className="image__container">
