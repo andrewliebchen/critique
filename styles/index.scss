@@ -59,6 +59,7 @@ body {
   position: absolute;
   transform: translate3d(-50%, -50%, 0);
   text-shadow: 0 3px 10px rgba(black, 0.3);
+  user-select: none;
 
   .is-adding-pips & {
     filter: grayscale(100%);

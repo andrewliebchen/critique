@@ -42,7 +42,7 @@ export default class EmojiPicker extends Component {
             className="picker__emoji"
             onClick={this.props.onChange.bind(null, emoji)}
             key={i}>
-            {emoji}
+            <span className="emoji">{emoji}</span>
           </div>
         )}
       </div>

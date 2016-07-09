@@ -1,11 +1,11 @@
-$emoji-width: 2.5rem;
+$emoji-width: 3rem;
 
 .picker {
   padding: 0.5rem;
   background-color: white;
   box-shadow: 0 5px 20px rgba(black, 0.2);
   box-sizing: content-box;
-  width: $emoji-width * 5;
+  width: $emoji-width * 6;
   position: absolute;
   top: 100%;
   left: 50%;
@@ -13,14 +13,20 @@ $emoji-width: 2.5rem;
 }
 
 .picker__emoji {
-  font-size: 1.5rem;
+  font-size: 2rem;
   text-align: center;
   width: $emoji-width;
   height: $emoji-width;
+  border-radius: $emoji-width / 2;
   display: inline-block;
   cursor: pointer;
+  position: relative;
 
   &:hover {
     box-shadow: inset 0 0 0 2px blue;
+  }
+
+  .emoji {
+    margin-top: 1px;
   }
 }
