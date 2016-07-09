@@ -17,9 +17,12 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "babel-eslint": "^6.1.1",
     "classnames": "^2.2.5",
     "emoji.json": "^1.1.1",
     "emojione-picker": "^0.3.6",
+    "eslint": "^3.0.1",
+    "eslint-plugin-react": "^5.2.2",
     "lodash": "^4.13.1",
     "moment": "^2.14.1",
     "react-copy-to-clipboard": "git@github.com:sudodoki/copy-to-clipboard.git#c5c9efff5cffe4f63a36ddb7ab1b311ff24825df",

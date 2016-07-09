@@ -5,7 +5,7 @@ import EmojiPicker from './EmojiPicker.jsx';
 
 export default class Pip extends Component {
   render() {
-    const { pip, picker, handleClick, closePicker, currentSession } = this.props;
+    const { pip, picker, handleClick, currentSession } = this.props;
     const containerClassName = classnames({
       'pip__container': true,
       'is-selected': picker,
@@ -31,7 +31,7 @@ export default class Pip extends Component {
       </div>
     );
   }
- };
+ }
 
 Pip.propTypes = {
   pip: PropTypes.object,

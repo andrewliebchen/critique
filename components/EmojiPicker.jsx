@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 const emojis = [
   '👍',
@@ -48,4 +48,4 @@ export default class EmojiPicker extends Component {
       </div>
     );
   }
-};
+}

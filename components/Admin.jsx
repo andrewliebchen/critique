@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
+import { Meteor } from 'meteor/meteor';
 import { Images } from '../api/main';
 import { Container, SectionHeader, Section, Table, ButtonOutline } from 'rebass';
 import moment from 'moment';
@@ -7,7 +8,7 @@ import moment from 'moment';
 class Admin extends Component {
   render() {
     const imagesData = [];
-    this.props.images.map((image, i) => {
+    this.props.images.map((image) => {
       imagesData.push([
         <strong><a href={`/i/${image._id}`}>{image.title}</a></strong>,
         <a href={image.url}>View image</a>,
@@ -34,9 +35,9 @@ class Admin extends Component {
       Meteor.call('deleteImage', id);
     }
   }
-};
+}
 
-export default createContainer(({params}) => {
+export default createContainer(() => {
   const dataHandle = Meteor.subscribe('admin');
   const dataIsReady = dataHandle.ready();
   return {

@@ -15,7 +15,6 @@ import truncate from 'truncate';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { Images, Pips } from '../api/main';
 import PipsContainer from './PipsContainer.jsx';
-import NewImage from './NewImage.jsx';
 
 class Image extends Component {
   constructor(props) {
@@ -97,6 +96,8 @@ class Image extends Component {
 
 Image.propTypes = {
   image: PropTypes.object,
+  pips: PropTypes.array,
+  dataIsReady: PropTypes.bool,
 };
 
 export default createContainer(({params}) => {

@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 
 Slingshot.fileRestrictions('fileUploads', {
-  allowedFileTypes: ["image/png", "image/jpeg", "image/gif"],
-  maxSize: 10 * 1024 * 1024 // 10 MB (use null for unlimited)
+  allowedFileTypes: ['image/png', 'image/jpeg', 'image/gif'],
+  maxSize: 10 * 1024 * 1024,
 });
 
 Slingshot.createDirective('fileUploads', Slingshot.S3Storage, {

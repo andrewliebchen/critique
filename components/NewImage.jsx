@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
-import ReactDOM from 'react-dom';
-import { Router } from 'react-router';
 import {
   Button,
   Card,
@@ -14,7 +12,6 @@ import {
 } from 'rebass';
 import moment from 'moment';
 import Dropzone from 'react-dropzone-es6';
-import { Images } from '../api/main';
 
 export default class NewImage extends Component {
   constructor(props) {
@@ -118,4 +115,4 @@ export default class NewImage extends Component {
       });
     }
   }
-};
+}

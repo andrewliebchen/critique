@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { createContainer } from 'meteor/react-meteor-data';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import { Meteor } from 'meteor/meteor';
@@ -33,11 +32,11 @@ export default class PipsContainer extends Component {
   }
 
   render() {
-    const { pips, imageId, dataIsReady, showPips, canAdd } = this.props;
+    const { pips, imageId, showPips, canAdd } = this.props;
     const pipsClassName = classnames({
       'pips': true,
       'can-add': canAdd,
-      'is-adding-pips': this.state.sessionPips.length > 0
+      'is-adding-pips': this.state.sessionPips.length > 0,
     });
     return (
       <div
@@ -84,7 +83,7 @@ export default class PipsContainer extends Component {
     event.stopPropagation();
     this.setState({picker: id});
   }
-};
+}
 
 PipsContainer.propTypes = {
   imageId: PropTypes.string,

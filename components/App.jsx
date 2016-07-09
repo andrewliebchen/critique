@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Router, Route, browserHistory } from 'react-router';
 import Image from './Image.jsx';
 import NewImage from './NewImage.jsx'
