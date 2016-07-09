@@ -31,6 +31,9 @@ body {
 
 .image__element {
   max-width: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .pips {
