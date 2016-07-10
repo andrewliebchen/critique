@@ -1,25 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
-import {
-  ButtonOutline,
-  Checkbox,
-  Container,
-  Donut,
-  Heading,
-} from 'rebass';
 import { Meteor } from 'meteor/meteor';
-import { Flex, Box } from 'reflexbox';
 import moment from 'moment';
-import truncate from 'truncate';
-import CopyToClipboard from 'react-copy-to-clipboard';
+import { Flex, Box } from 'reflexbox';
 import { Images, Pips } from '../api/main';
 import PipsContainer from './PipsContainer.jsx';
+import ImageFooter from './ImageFooter.jsx';
 
 class Image extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      copied: false,
       pips: true,
     };
   }
@@ -32,52 +23,24 @@ class Image extends Component {
       const lifespan = lifespanEllapsed / lifespanTotal;
       const isActive = lifespan > 0 || !image.expires_at;
       return (
-        <div>
-          <div className="image__container">
-            <img src={image.url} className="image__element"/>
-            <PipsContainer
-              imageId={image._id}
-              pips={pips}
-              showPips={this.state.pips}
-              canAdd={isActive}/>
-          </div>
-          <Container>
-            <Flex align="center">
-              {image.expires_at > 0 &&
-                <Box>
-                  <Donut
-                    color={isActive ? 'primary' : 'error'}
-                    size={64}
-                    strokeWidth={8}
-                    value={isActive ? 1 - lifespan : 1}/>
-                </Box>}
-              <Box px={2} auto>
-                <Heading href={image.url}>
-                  {image.title ? image.title : truncate(image.url, 8)}
-                </Heading>
-                {image.expires_at > 0 ?
-                  <span>
-                    {isActive ? 'Expires' : 'Expired'} {moment(image.expires_at).fromNow()} at {moment(image.expires_at).format('h:mma [on] dddd MMM Do')}
-                  </span>
-                : <span>Sweet, image doesn't expire</span>}
-              </Box>
-              <Box>
-                <Checkbox
-                  label="Display pips"
-                  name="displayPips"
-                  checked={this.state.pips}
-                  onChange={this.handlePipsToggle.bind(this)}/>
-                <CopyToClipboard
-                  text={`http://example.com/i/${image._id}`}
-                  onCopy={this.handleCopy.bind(this)}>
-                  <ButtonOutline theme="success" pill style={{float: 'right'}}>
-                    {this.state.copied ? 'Copied!' : 'Copy link'}
-                  </ButtonOutline>
-                </CopyToClipboard>
-              </Box>
-            </Flex>
-          </Container>
-        </div>
+        <Flex justify="center">
+          <Box>
+            <div className="image__container">
+              <img src={image.url} className="image__element"/>
+              <PipsContainer
+                imageId={image._id}
+                pips={pips}
+                showPips={this.state.pips}
+                canAdd={isActive}/>
+            </div>
+          </Box>
+          <ImageFooter
+            image={image}
+            isActive={isActive}
+            lifespan={lifespan}
+            pips={this.state.pips}
+            pipsToggle={this.handlePipsToggle.bind(this)}/>
+        </Flex>
       );
     } else {
       return <span className="loader">Loading...</span>;
@@ -86,10 +49,6 @@ class Image extends Component {
 
   handlePipsToggle() {
     this.setState({pips: !this.state.pips});
-  }
-
-  handleCopy() {
-    this.setState({copied: true});
   }
 }
 
