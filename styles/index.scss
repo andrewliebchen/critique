@@ -115,7 +115,7 @@ body {
   width: 100%;
   outline: 0;
   font-size: 1rem;
-  margin: 0.25rem 0;
+  margin: 0.25rem 0 0;
 
   &:focus {
     background-color: white;
@@ -137,12 +137,11 @@ body {
   &::-webkit-slider-thumb {
     $size: 2rem;
     appearance: none;
-    border: 2px solid white;
     border-radius: $size / 2;
     width: $size;
     height: $size;
     margin-top: -($size / 2);
-    background-color: $brand-primary;
+    background-color: white;
     cursor: ew-resize;
   }
 
@@ -167,7 +166,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  // background-color: $brand-primary;
+  overflow: auto;
 }
 
 .dropzone {
@@ -182,6 +181,11 @@ body {
     background-color: rgba(white, 0.3);
     border-style: solid;
   }
+}
+
+.new-image__form {
+  width: 30rem;
+  margin: 0 auto 3rem;
 }
 
 .image__container {

@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
-import {
-  Card,
-  CardImage,
-  Container,
-  Heading,
-  Text,
-} from 'rebass';
 import moment from 'moment';
 import Dropzone from 'react-dropzone-es6';
 
@@ -24,9 +17,8 @@ export default class NewImage extends Component {
     const { url, title, lifespan } = this.state;
     return (
       <div className="new-image">
-        <Container>
+        <div className="new-image__form">
           <div className="form-group">
-          {!url ?
             <Dropzone
               multiple={false}
               style={{}}
@@ -35,14 +27,6 @@ export default class NewImage extends Component {
               onDrop={this.handleFileUpload.bind(this)}>
               <div>Try dropping some files here, or click to select files to upload.</div>
             </Dropzone>
-          :
-            <Card width={256}>
-              <CardImage src={url} />
-              <Heading level={3}>{title}</Heading>
-              <Text>
-                <a onClick={this.handleRemoveImage.bind(this)}>Remove</a>
-              </Text>
-            </Card>}
           </div>
           <div className="form-group">
             <label className="label">Image title</label>
@@ -55,8 +39,8 @@ export default class NewImage extends Component {
           <div className="form-group">
             <label className="label">
               {lifespan > 0 ?
-                `Expires in ${lifespan} hour${lifespan > 1 ? 's' : ''} at ${moment().add(lifespan, 'hour').format('h:mma [on] dddd MMM Do')}`
-              : 'Never expires'}
+                `Image expires in ${lifespan} hour${lifespan > 1 ? 's' : ''} at ${moment().add(lifespan, 'hour').format('h:mma [on] dddd MMM Do')}`
+              : 'Image never expires'}
             </label>
             <input
               type="range"
@@ -74,7 +58,7 @@ export default class NewImage extends Component {
               Create image
             </button>
           </div>
-        </Container>
+        </div>
       </div>
     );
   }
