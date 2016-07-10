@@ -13,6 +13,8 @@ $button-styles: (
   error: $brand-error
 );
 
+$border-radius: 5px;
+
 $transition: 0.1s ease-in-out;
 
 @import "emoji-picker";
@@ -35,7 +37,7 @@ body {
   @include checkerboard;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.5;
-  color: #111;
+  color: $gray-dark;
 }
 
 .button {
@@ -47,12 +49,12 @@ body {
   display: inline-block;
   background: none;
   font-size: 1rem;
-  border-radius: 3px;
+  border-radius: $border-radius;
   cursor: pointer;
   outline: 0;
 
   &:disabled {
-
+    cursor: not-allowed;
   }
 
   @each $name, $color in $button-styles {
@@ -72,11 +74,54 @@ body {
   }
 }
 
+.form-group {
+
+}
+
+.label {
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.input {
+  appearance: none;
+  border: 2px solid white;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: $border-radius;
+  background: none;
+  display: block;
+  line-height: 2;
+  width: 100%;
+  outline: 0;
+  font-size: 1rem;
+  margin: 0.25rem 0;
+
+  &:focus {
+    background-color: white;
+    color: $gray-dark;
+  }
+
+  &::placeholder {
+    color: rgba(white, 0.5);
+  }
+}
+
 .loader {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
+}
+
+.new-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $brand-primary;
 }
 
 .image__container {

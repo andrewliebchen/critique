@@ -6,7 +6,6 @@ import {
   CardImage,
   Container,
   Heading,
-  Input,
   Slider,
   Text,
 } from 'rebass';
@@ -26,47 +25,50 @@ export default class NewImage extends Component {
   render() {
     const { url, title, lifespan } = this.state;
     return (
-      <Container>
-        {!url ?
-          <Dropzone
-            multiple={false}
-            onDrop={this.handleFileUpload.bind(this)}>
-            <div>Try dropping some files here, or click to select files to upload.</div>
-          </Dropzone>
-        :
-          <Card width={256}>
-            <CardImage src={url} />
-            <Heading level={3}>{title}</Heading>
-            <Text>
-              <a onClick={this.handleRemoveImage.bind(this)}>Remove</a>
-            </Text>
-          </Card>}
-        <Input
-          type="text"
-          label="Title"
-          name="imageTitle"
-          value={title}
-          placeholder="Awesome design"
-          onChange={this.handleTitleChange.bind(this)}/>
-        <Slider
-          label={lifespan > 0 ? `Expires in ${lifespan} hour${lifespan > 1 ? 's' : ''} at ${moment().add(lifespan, 'hour').format('h:mma [on] dddd MMM Do')}` : 'Never expires'}
-          name="lifespan"
-          min="0"
-          max="36"
-          onChange={this.handleLifespan.bind(this)}
-          defaultValue={lifespan}
-          mt={3}
-          fill/>
-        <div className={this.state.url ? '' : 'disabled'}>
-          <Button
-            onClick={this.handleAddImage.bind(this)}
+      <div className="new-image">
+        <Container>
+          {!url ?
+            <Dropzone
+              multiple={false}
+              onDrop={this.handleFileUpload.bind(this)}>
+              <div>Try dropping some files here, or click to select files to upload.</div>
+            </Dropzone>
+          :
+            <Card width={256}>
+              <CardImage src={url} />
+              <Heading level={3}>{title}</Heading>
+              <Text>
+                <a onClick={this.handleRemoveImage.bind(this)}>Remove</a>
+              </Text>
+            </Card>}
+          <div className="form-group">
+            <label className="label">Image title</label>
+            <input
+              className="input"
+              type="text"
+              placeholder="Awesome design"
+              onChange={this.handleTitleChange.bind(this)}/>
+          </div>
+          <Slider
+            label={lifespan > 0 ? `Expires in ${lifespan} hour${lifespan > 1 ? 's' : ''} at ${moment().add(lifespan, 'hour').format('h:mma [on] dddd MMM Do')}` : 'Never expires'}
+            name="lifespan"
+            min="0"
+            max="36"
+            onChange={this.handleLifespan.bind(this)}
+            defaultValue={lifespan}
             mt={3}
-            style={{width: '100%'}}
-            big>
-            Create image
-          </Button>
-        </div>
-      </Container>
+            fill/>
+          <div className={this.state.url ? '' : 'disabled'}>
+            <Button
+              onClick={this.handleAddImage.bind(this)}
+              mt={3}
+              style={{width: '100%'}}
+              big>
+              Create image
+            </Button>
+          </div>
+        </Container>
+      </div>
     );
   }
 
