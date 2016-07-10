@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import {
-  Button,
   Card,
   CardImage,
   Container,
   Heading,
-  Slider,
   Text,
 } from 'rebass';
 import moment from 'moment';
@@ -16,8 +14,8 @@ export default class NewImage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: null,
-      title: null,
+      url: false,
+      title: false,
       lifespan: 0,
     };
   }
@@ -27,9 +25,13 @@ export default class NewImage extends Component {
     return (
       <div className="new-image">
         <Container>
+          <div className="form-group">
           {!url ?
             <Dropzone
               multiple={false}
+              style={{}}
+              className="dropzone"
+              activeClassName="is-active"
               onDrop={this.handleFileUpload.bind(this)}>
               <div>Try dropping some files here, or click to select files to upload.</div>
             </Dropzone>
@@ -41,6 +43,7 @@ export default class NewImage extends Component {
                 <a onClick={this.handleRemoveImage.bind(this)}>Remove</a>
               </Text>
             </Card>}
+          </div>
           <div className="form-group">
             <label className="label">Image title</label>
             <input
@@ -49,23 +52,27 @@ export default class NewImage extends Component {
               placeholder="Awesome design"
               onChange={this.handleTitleChange.bind(this)}/>
           </div>
-          <Slider
-            label={lifespan > 0 ? `Expires in ${lifespan} hour${lifespan > 1 ? 's' : ''} at ${moment().add(lifespan, 'hour').format('h:mma [on] dddd MMM Do')}` : 'Never expires'}
-            name="lifespan"
-            min="0"
-            max="36"
-            onChange={this.handleLifespan.bind(this)}
-            defaultValue={lifespan}
-            mt={3}
-            fill/>
-          <div className={this.state.url ? '' : 'disabled'}>
-            <Button
-              onClick={this.handleAddImage.bind(this)}
-              mt={3}
-              style={{width: '100%'}}
-              big>
+          <div className="form-group">
+            <label className="label">
+              {lifespan > 0 ?
+                `Expires in ${lifespan} hour${lifespan > 1 ? 's' : ''} at ${moment().add(lifespan, 'hour').format('h:mma [on] dddd MMM Do')}`
+              : 'Never expires'}
+            </label>
+            <input
+              type="range"
+              className="slider"
+              min="0"
+              max="36"
+              onChange={this.handleLifespan.bind(this)}
+              defaultValue={lifespan}/>
+          </div>
+          <div className="form-group">
+            <button
+              className="button white big"
+              disabled={!url}
+              onClick={this.handleAddImage.bind(this)}>
               Create image
-            </Button>
+            </button>
           </div>
         </Container>
       </div>
