@@ -25,6 +25,7 @@
     "eslint-plugin-react": "^5.2.2",
     "lodash": "^4.13.1",
     "moment": "^2.14.1",
+    "react-addons-css-transition-group": "^15.2.1",
     "react-copy-to-clipboard": "git@github.com:sudodoki/copy-to-clipboard.git#c5c9efff5cffe4f63a36ddb7ab1b311ff24825df",
     "react-dropzone-es6": "^1.0.2",
     "react-page-click": "^3.0.0",

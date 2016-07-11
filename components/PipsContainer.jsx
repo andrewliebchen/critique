@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { Meteor } from 'meteor/meteor';
 import { $ } from 'meteor/jquery';
 import _ from 'lodash';
+import CSSTransitionGroup from 'react-addons-css-transition-group';
 import Pip from './Pip.jsx';
 
 export default class PipsContainer extends Component {
@@ -43,15 +44,20 @@ export default class PipsContainer extends Component {
         className={pipsClassName}
         onClick={this.handleAddPip.bind(this)}
         ref="pips">
-        {pips && showPips && pips.map((pip, i) =>
-          <Pip
-            key={i}
-            pip={pip}
-            imageId={imageId}
-            picker={this.state.picker === pip._id}
-            handleClick={this.handlePickerToggle}
-            currentSession={_.includes(this.state.sessionPips, pip._id)}/>
-        )}
+        <CSSTransitionGroup
+          transitionName="pip"
+          transitionEnterTimeout={100}
+          transitionLeaveTimeout={100}>
+          {pips && showPips && pips.map((pip, i) =>
+            <Pip
+              key={i}
+              pip={pip}
+              imageId={imageId}
+              picker={this.state.picker === pip._id}
+              handleClick={this.handlePickerToggle}
+              currentSession={_.includes(this.state.sessionPips, pip._id)}/>
+          )}
+        </CSSTransitionGroup>
       </div>
     );
   }

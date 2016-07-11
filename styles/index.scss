@@ -16,6 +16,7 @@ $button-styles: (
 $border-radius: 5px;
 
 $transition: 0.1s ease-in-out;
+$ease-in-out-back: cubic-bezier(0.680, -0.550, 0.265, 1.550);
 
 @import "emoji-picker";
 
@@ -40,7 +41,13 @@ body {
   color: $gray-dark;
 }
 
+::selection {
+  background-color: $brand-primary;
+  color: white;
+}
+
 .button {
+  transition: 0.1s linear;
   appearance: none;
   border: 2px solid;
   font-weight: bold;
@@ -59,6 +66,10 @@ body {
     opacity: 0.5;
   }
 
+  &:active {
+    transform: translateY(0.5rem);
+  }
+
   &.big {
     line-height: 3rem;
     width: 100%;
@@ -73,6 +84,10 @@ body {
       background-color: white;
       color: $brand-primary;
       border-color: white;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 1px $brand-primary, 0 0 0 3px white;
     }
   }
 
@@ -104,6 +119,7 @@ body {
 }
 
 .input {
+  transition: 0.1s linear;
   appearance: none;
   border: 2px solid white;
   color: white;
@@ -143,6 +159,7 @@ body {
     margin-top: -($size / 2);
     background-color: white;
     cursor: ew-resize;
+    box-shadow: 0 0 0 3px $brand-primary;
   }
 
   &::-webkit-slider-runnable-track {
@@ -267,6 +284,28 @@ body {
   .is-current & {
     filter: grayscale(0%);
     cursor: pointer;
+  }
+}
+
+.pip-enter {
+  opacity: 0.01;
+  transform: scale(0.5);
+
+  &.pip-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: 0.1s ease-out;
+  }
+}
+
+.pip-leave {
+  opacity: 1;
+  transform: scale(1);
+
+  &.pip-leave-active {
+    opacity: 0.01;
+    transform: scale(0.5);
+    transition: 0.1s ease-out;
   }
 }
 

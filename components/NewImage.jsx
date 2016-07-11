@@ -35,7 +35,7 @@ export default class NewImage extends Component {
               accept="image/*"
               onDrop={this.handleFileUpload.bind(this)}>
               <div className="dropzone__message">
-                {uploading ? 'Uploading file' : 'Drop an image here to upload'}
+                {uploading ? 'Uploading file...' : 'Drop an image here to upload'}
               </div>
             </Dropzone>
           </div>

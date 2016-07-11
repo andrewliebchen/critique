@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import classnames from 'classnames';
+import CSSTransitionGroup from 'react-addons-css-transition-group';
 import EmojiPicker from './EmojiPicker.jsx';
 
 export default class Pip extends Component {
@@ -21,13 +22,18 @@ export default class Pip extends Component {
         <div className="pip" onClick={handleClick.bind(null, pip._id)}>
           <span className="emoji">{pip.emoji}</span>
         </div>
-        {picker && currentSession &&
-          <EmojiPicker onChange={(emoji) => {
-            Meteor.call('updateEmoji', {
-              id: this.props.pip._id,
-              emoji: emoji,
-            });
-          }}/>}
+        <CSSTransitionGroup
+          transitionName="picker"
+          transitionEnterTimeout={200}
+          transitionLeaveTimeout={200}>
+          {picker && currentSession &&
+            <EmojiPicker onChange={(emoji) => {
+              Meteor.call('updateEmoji', {
+                id: this.props.pip._id,
+                emoji: emoji,
+              });
+            }}/>}
+        </CSSTransitionGroup>
       </div>
     );
   }
