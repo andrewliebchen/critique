@@ -287,6 +287,7 @@ body {
   padding: 1rem;
   transition: $transition;
   z-index: 99;
+  border-top: 1px solid $gray-lighter;
 
   &:hover {
     transform: translateY(0);

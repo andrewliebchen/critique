@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import moment from 'moment';
+import Title from 'react-title-component'
 import { Flex, Box } from 'reflexbox';
 import { Images, Pips } from '../api/main';
 import PipsContainer from './PipsContainer.jsx';
@@ -24,6 +25,7 @@ class Image extends Component {
       const isActive = lifespan > 0 || !image.expires_at;
       return (
         <Flex justify="center">
+          <Title render={`${image.title} | Critique`}/>
           <Box>
             <div className="image__container">
               <img src={image.url} className="image__element"/>

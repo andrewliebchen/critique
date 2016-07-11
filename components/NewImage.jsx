@@ -3,13 +3,14 @@ import { Meteor } from 'meteor/meteor';
 import moment from 'moment';
 import classnames from 'classnames';
 import Dropzone from 'react-dropzone-es6';
+import Title from 'react-title-component'
 
 export default class NewImage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       url: false,
-      title: null,
+      title: '',
       lifespan: 0,
       uploading: false,
     };
@@ -23,6 +24,7 @@ export default class NewImage extends Component {
     })
     return (
       <div className="new-image">
+        <Title render="New image | Critique"/>
         <div className="new-image__form">
           <div className="form-group">
             <Dropzone
@@ -43,13 +45,13 @@ export default class NewImage extends Component {
               className="input"
               type="text"
               placeholder="Awesome design"
-              defaultValue={title}
+              value={title}
               onChange={this.handleTitleChange.bind(this)}/>
           </div>
           <div className="form-group">
             <label className="label">
               {lifespan > 0 ?
-                `Image expires in ${lifespan} hour${lifespan > 1 ? 's' : ''} at ${moment().add(lifespan, 'hour').format('h:mma [on] dddd MMM Do')}`
+                `Image expires in </strong>${lifespan} hour${lifespan > 1 ? 's' : ''} at ${moment().add(lifespan, 'hour').format('h:mma [on] dddd MMM Do')}`
               : 'Image never expires'}
             </label>
             <input
@@ -65,7 +67,7 @@ export default class NewImage extends Component {
               className="button white big"
               disabled={!url}
               onClick={this.handleAddImage.bind(this)}>
-              Create image
+              Create image and go 👉
             </button>
           </div>
         </div>
@@ -83,15 +85,15 @@ export default class NewImage extends Component {
     this.setState({uploading: true});
 
     const file = files[0];
-    const uploader = new Slingshot.Upload('fileUploads');
+    const uploader = new Slingshot.Upload('fileUploads'); // eslint-disable-line
 
     uploader.send(file, (error, url) => {
       if (error) {
-        console.error('Error uploading', uploader.xhr.response);
+        console.error('Error uploading', uploader.xhr.response); // eslint-disable-line
       } else {
         this.setState({
           url: url,
-          title: file.name,
+          title: this.state.title ? this.state.title : file.name,
           uploading: false,
         })
       }
@@ -100,10 +102,6 @@ export default class NewImage extends Component {
 
   handleTitleChange(event) {
     this.setState({title: event.target.value})
-  }
-
-  handleRemoveImage() {
-    this.setState({url: null});
   }
 
   handleLifespan(event) {
