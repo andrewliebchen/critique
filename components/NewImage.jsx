@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
-import moment from 'moment';
 import classnames from 'classnames';
 import Dropzone from 'react-dropzone-es6';
-import Title from 'react-title-component'
+import Title from 'react-title-component';
+import expireMessage from '../lib/expireMessage';
 
 export default class NewImage extends Component {
   constructor(props) {
@@ -56,11 +56,7 @@ export default class NewImage extends Component {
               onChange={this.handleTitleChange.bind(this)}/>
           </div>
           <div className="form-group">
-            <label className="label">
-              {lifespan > 0 ?
-                `Image expires in ${lifespan} hour${lifespan > 1 ? 's' : ''} at ${moment().add(lifespan, 'hour').format('h:mma [on] dddd MMM Do')}`
-              : 'Image never expires'}
-            </label>
+            <label className="label">{expireMessage(lifespan)}</label>
             <input
               type="range"
               className="slider"
@@ -123,6 +119,7 @@ export default class NewImage extends Component {
       Meteor.call('addImage', {
         url: url,
         title: title,
+        lifespan: lifespan,
         created_at: created_at,
         expires_at: lifespan > 0 ? created_at + (lifespan * 3600000) : false,
         token: this.props.params.id,

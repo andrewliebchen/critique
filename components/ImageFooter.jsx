@@ -5,6 +5,7 @@ import { Flex, Box } from 'reflexbox';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import moment from 'moment';
 import classnames from 'classnames';
+import expireMessage from '../lib/expireMessage';
 
 export default class ImageFooter extends Component {
   constructor(props) {
@@ -16,20 +17,17 @@ export default class ImageFooter extends Component {
 
   render() {
     const { image, isActive, lifespan, pips, pipsToggle } = this.props;
+    const isExpired = lifespan <= 0;
     const lifespanClassName = classnames({
       'lifespan': true,
-      'is-expired': lifespan <= 0,
+      'is-expired': isExpired,
     });
     return (
       <footer className="footer">
         <Flex align="center">
           <h2 className="image__title">{image.title}</h2>
           <Box auto>
-            {image.expires_at > 0 ?
-              <span>
-                {isActive ? 'Expires' : 'Expired'} {moment(image.expires_at).fromNow()} at {moment(image.expires_at).format('h:mma [on] dddd MMM Do')}
-              </span>
-            : <span>This image doesn't expire 🌟</span>}
+            {isExpired ? 'Image is expired 🙅' : expireMessage(lifespan * 24)}
           </Box>
           <Box>
             <Checkbox
