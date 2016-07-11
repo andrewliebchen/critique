@@ -2,7 +2,8 @@
   "name": "critique",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "deploy": "git push heroku master"
   },
   "dependencies": {
     "meteor-node-stubs": "~0.2.0",
@@ -19,8 +20,6 @@
   "devDependencies": {
     "babel-eslint": "^6.1.1",
     "classnames": "^2.2.5",
-    "emoji.json": "^1.1.1",
-    "emojione-picker": "^0.3.6",
     "eslint": "^3.0.1",
     "eslint-plugin-react": "^5.2.2",
     "lodash": "^4.13.1",

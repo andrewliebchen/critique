@@ -58,7 +58,7 @@ export default class NewImage extends Component {
           <div className="form-group">
             <label className="label">
               {lifespan > 0 ?
-                `Image expires in </strong>${lifespan} hour${lifespan > 1 ? 's' : ''} at ${moment().add(lifespan, 'hour').format('h:mma [on] dddd MMM Do')}`
+                `Image expires in ${lifespan} hour${lifespan > 1 ? 's' : ''} at ${moment().add(lifespan, 'hour').format('h:mma [on] dddd MMM Do')}`
               : 'Image never expires'}
             </label>
             <input
