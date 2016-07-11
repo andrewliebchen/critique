@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Meteor } from 'meteor/meteor';
 import moment from 'moment';
+import classnames from 'classnames';
 import Dropzone from 'react-dropzone-es6';
 
 export default class NewImage extends Component {
@@ -10,11 +11,16 @@ export default class NewImage extends Component {
       url: false,
       title: null,
       lifespan: 0,
+      uploading: false,
     };
   }
 
   render() {
-    const { url, title, lifespan } = this.state;
+    const { url, title, lifespan, uploading } = this.state;
+    const dropzoneClassName = classnames({
+      'dropzone': true,
+      'is-uploading': uploading,
+    })
     return (
       <div className="new-image">
         <div className="new-image__form">
@@ -22,10 +28,13 @@ export default class NewImage extends Component {
             <Dropzone
               multiple={false}
               style={{}}
-              className="dropzone"
+              className={dropzoneClassName}
               activeClassName="is-active"
+              accept="image/*"
               onDrop={this.handleFileUpload.bind(this)}>
-              <div>Try dropping some files here, or click to select files to upload.</div>
+              <div className="dropzone__message">
+                {uploading ? 'Uploading file' : 'Drop an image here to upload'}
+              </div>
             </Dropzone>
           </div>
           <div className="form-group">
@@ -71,6 +80,8 @@ export default class NewImage extends Component {
   }
 
   handleFileUpload(files) {
+    this.setState({uploading: true});
+
     const file = files[0];
     const uploader = new Slingshot.Upload('fileUploads');
 
@@ -81,6 +92,7 @@ export default class NewImage extends Component {
         this.setState({
           url: url,
           title: file.name,
+          uploading: false,
         })
       }
     });
