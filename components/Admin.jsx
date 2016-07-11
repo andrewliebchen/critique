@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 import {
   ButtonOutline,
   Container,
   InlineForm,
-  Section,
-  SectionHeader,
+  Panel,
+  PanelHeader,
   Table,
  } from 'rebass';
 import { Meteor } from 'meteor/meteor';
@@ -17,6 +18,7 @@ class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      auth: false,
       tokenRecipient: null,
     };
   }
@@ -46,30 +48,54 @@ class Admin extends Component {
       ]);
     });
 
+    if (!this.state.auth) {
+      return (
+        <form onSubmit={this.handlePassword.bind(this)}>
+          <input type="type" ref="password"/>
+          <input type="submit" value="Log in"/>
+        </form>
+      );
+    }
+
     return (
       <Container>
-        <Section>
-          <SectionHeader heading="Images"/>
-            <Table
-              headings={['Title', 'Image URL', 'Created at', 'Expires', 'Recipient', '']}
-              data={imagesData}/>
-          </Section>
-        <Section>
-          <SectionHeader heading="Tokens"/>
-            <Table
-              headings={['Token', 'Recipient email', 'Created at', '']}
-              data={tokensData}/>
-            <InlineForm
-              label="Recient email"
-              name="recipient_email"
-              buttonLabel="Create Token"
-              placeholder="Recipient email"
-              type="email"
-              onChange={this.handleTokenEmailChange.bind(this)}
-              onClick={this.handleCreateToken.bind(this)}/>
-        </Section>
+        <Panel>
+          <PanelHeader>Images</PanelHeader>
+          <Table
+            headings={['Title', 'Image URL', 'Created at', 'Expires', 'Recipient', '']}
+            data={imagesData}/>
+        </Panel>
+        <Panel>
+          <PanelHeader>Tokens</PanelHeader>
+          <Table
+            headings={['Token', 'Recipient email', 'Created at', '']}
+            data={tokensData}/>
+          <InlineForm
+            label="Recient email"
+            name="recipient_email"
+            buttonLabel="Create Token"
+            placeholder="Recipient email"
+            type="email"
+            onChange={this.handleTokenEmailChange.bind(this)}
+            onClick={this.handleCreateToken.bind(this)}/>
+        </Panel>
       </Container>
     );
+  }
+
+  handlePassword(event) {
+    event.preventDefault();
+    const password = ReactDOM.findDOMNode(this.refs.password).value;
+
+    if (password !== '') {
+      Meteor.call('checkAuth', password, (error, success) => {
+        if (success) {
+          this.setState({auth: true});
+        } else {
+          console.warn('Nope!');
+        }
+      });
+    }
   }
 
   handleImageDelete(id) {
