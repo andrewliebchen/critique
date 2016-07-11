@@ -41,6 +41,15 @@ body {
   color: $gray-dark;
 }
 
+a {
+  cursor: pointer;
+  color: inherit;
+}
+
+h1 {
+  letter-spacing: 0.02em;
+}
+
 ::selection {
   background-color: $brand-primary;
   color: white;
@@ -60,12 +69,6 @@ body {
   cursor: pointer;
   outline: 0;
 
-  &:disabled {
-    cursor: not-allowed;
-    pointer-events: none;
-    opacity: 0.5;
-  }
-
   &:active {
     transform: translateY(0.5rem);
   }
@@ -80,7 +83,7 @@ body {
     border: 0;
     background-color: $gray-dark;
 
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: white;
       color: $brand-primary;
       border-color: white;
@@ -95,7 +98,7 @@ body {
     &.#{$name} {
       color: $color;
 
-      &:hover {
+      &:hover:not(:disabled) {
         background-color: $color;
         color: white;
         border-color: $color;
@@ -105,6 +108,11 @@ body {
         box-shadow: 0 0 0 1px white, 0 0 0 3px $color;
       }
     }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 }
 
@@ -184,6 +192,14 @@ body {
   right: 0;
   bottom: 0;
   overflow: auto;
+  color: white;
+}
+
+.new-image__container {
+  width: 32rem;
+  margin: 0 auto 3rem;
+  position: relative;
+  z-index: 1;
 }
 
 .dropzone {
@@ -213,16 +229,6 @@ body {
     background-color: rgba(white, 0.3);
     border-style: solid;
   }
-}
-
-.dropzone__message {
-}
-
-.new-image__form {
-  width: 30rem;
-  margin: 0 auto 3rem;
-  position: relative;
-  z-index: 1;
 }
 
 .new-image__preview {

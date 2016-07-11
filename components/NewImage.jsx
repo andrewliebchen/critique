@@ -25,7 +25,14 @@ export default class NewImage extends Component {
     return (
       <div className="new-image">
         <Title render="New image | Critique"/>
-        <div className="new-image__form">
+        <div className="new-image__container">
+          <h1>Welcome to Critique</h1>
+          <p>
+            Critique is a quick way to get pointed feedback on your designs.
+            Upload your design, set an expiration time like Snapchat (or let just it run forever), then send the link to whomever.
+            They use emoji's to add feedback 👍👎 to specific points on the design.
+          </p>
+          <p>Try a <a href="#">demo image</a> yourself, or just dive in...</p>
           <div className="form-group">
             <Dropzone
               multiple={false}

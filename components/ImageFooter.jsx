@@ -22,7 +22,7 @@ export default class ImageFooter extends Component {
     return (
       <footer className="footer">
         <Flex align="center">
-          <h1 className="image__title">{image.title}</h1>
+          <h2 className="image__title">{image.title}</h2>
           <Box auto>
             {image.expires_at > 0 ?
               <span>
