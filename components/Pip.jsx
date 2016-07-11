@@ -26,13 +26,7 @@ export default class Pip extends Component {
           transitionName="picker"
           transitionEnterTimeout={200}
           transitionLeaveTimeout={200}>
-          {picker && currentSession &&
-            <EmojiPicker onChange={(emoji) => {
-              Meteor.call('updateEmoji', {
-                id: this.props.pip._id,
-                emoji: emoji,
-              });
-            }}/>}
+          {picker && currentSession && <EmojiPicker pipId={this.props.pip._id}/>}
         </CSSTransitionGroup>
       </div>
     );

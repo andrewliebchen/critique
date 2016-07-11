@@ -19,4 +19,8 @@ Meteor.methods({
       },
     });
   },
+
+  deletePip(id) {
+    return Pips.remove(id);
+  },
 });

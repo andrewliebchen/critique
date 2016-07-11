@@ -46,6 +46,10 @@ $emoji-width: 3rem;
   }
 }
 
+.picker__delete {
+  width: 100%;
+}
+
 .picker-enter {
   opacity: 0.01;
   transform: translate3d(-50%, 0, 0);
