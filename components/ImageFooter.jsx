@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Checkbox } from 'rebass';
 import { Flex, Box } from 'reflexbox';
 import CopyToClipboard from 'react-copy-to-clipboard';
@@ -18,7 +19,7 @@ export default class ImageFooter extends Component {
     const lifespanClassName = classnames({
       'lifespan': true,
       'is-expired': lifespan <= 0,
-    })
+    });
     return (
       <footer className="footer">
         <Flex align="center">
@@ -28,7 +29,7 @@ export default class ImageFooter extends Component {
               <span>
                 {isActive ? 'Expires' : 'Expired'} {moment(image.expires_at).fromNow()} at {moment(image.expires_at).format('h:mma [on] dddd MMM Do')}
               </span>
-            : <span>Sweet, image doesn't expire</span>}
+            : <span>This image doesn't expire 🌟</span>}
           </Box>
           <Box>
             <Checkbox
@@ -41,7 +42,7 @@ export default class ImageFooter extends Component {
           </Box>
           <Box pl={2}>
             <CopyToClipboard
-              text={`http://example.com/i/${image._id}`}
+              text={`${Meteor.absoluteUrl()}i/${image._id}`}
               onCopy={this.handleCopy.bind(this)}>
               <button className="button success">
                 {this.state.copied ? 'Copied!' : 'Copy link'}
