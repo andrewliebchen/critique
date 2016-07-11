@@ -8,7 +8,7 @@ export default class NewImage extends Component {
     super(props);
     this.state = {
       url: false,
-      title: false,
+      title: null,
       lifespan: 0,
     };
   }
@@ -34,6 +34,7 @@ export default class NewImage extends Component {
               className="input"
               type="text"
               placeholder="Awesome design"
+              defaultValue={title}
               onChange={this.handleTitleChange.bind(this)}/>
           </div>
           <div className="form-group">
@@ -59,6 +60,12 @@ export default class NewImage extends Component {
             </button>
           </div>
         </div>
+        {url &&
+          <div className="new-image__preview">
+            <div className="image__container">
+              <img src={url} className="image__element"/>
+            </div>
+          </div>}
       </div>
     );
   }

@@ -186,12 +186,28 @@ body {
 .new-image__form {
   width: 30rem;
   margin: 0 auto 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.new-image__preview {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 .image__container {
   display: inline-block;
   position: relative;
   margin-bottom: 4rem;
+
+  .new-image & {
+    opacity: 0.2;
+    filter: blur(10px);
+  }
 }
 
 .image__element {
