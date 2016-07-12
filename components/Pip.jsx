@@ -15,6 +15,7 @@ export default class Pip extends Component {
     return (
       <div
         className={containerClassName}
+        title={currentSession ? 'Click to edit' : 'Previous pips can\'t be edited.'}
         style={{
           left: `${pip.x}%`,
           top: `${pip.y}%`,
