@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  @include checkerboard;
+  color: $gray-dark;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  cursor: pointer;
+}
+
+h1 {
+  letter-spacing: 0.02em;
+}
+
+::selection {
+  background-color: $brand-primary;
+  color: white;
+}

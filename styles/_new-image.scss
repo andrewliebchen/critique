@@ -1,0 +1,55 @@
+.new-image {
+  @include checkerboard($color-1: $brand-primary, $color-2: darken($brand-primary, 1%));
+  bottom: 0;
+  color: white;
+  left: 0;
+  overflow: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.new-image__container {
+  margin: 0 auto 3rem;
+  position: relative;
+  width: 32rem;
+  z-index: 1;
+}
+
+.dropzone {
+  border-radius: $border-radius;
+  border: 2px dashed;
+  color: white;
+  font-weight: bold;
+  min-height: 9rem;
+  padding: 4rem;
+  position: relative;
+  text-align: center;
+  user-select: none;
+
+  &.is-uploading {
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 5px,
+      rgba(white, 0.3) 5px,
+      rgba(white, 0.3) 10px
+    );
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &.is-active {
+    background-color: rgba(white, 0.3);
+    border-style: solid;
+  }
+}
+
+.new-image__preview {
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}

@@ -1,0 +1,60 @@
+.form-group {
+  margin-top: 3rem;
+}
+
+.label {
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.input {
+  appearance: none;
+  background: none;
+  border-radius: $border-radius;
+  border: 2px solid white;
+  color: white;
+  display: block;
+  font-size: 1rem;
+  line-height: 2;
+  margin: 0.25rem 0 0;
+  outline: 0;
+  padding: 0.25rem 0.5rem;
+  transition: 0.1s linear;
+  width: 100%;
+
+  &:focus {
+    background-color: white;
+    color: $gray-dark;
+  }
+
+  &::placeholder {
+    color: rgba(white, 0.5);
+  }
+}
+
+.slider {
+  appearance: none;
+  display: block;
+  margin: 1.5rem 0 0;
+  outline: 0;
+  width: 100%;
+
+  &::-webkit-slider-thumb {
+    $size: 2rem;
+    appearance: none;
+    background-color: white;
+    border-radius: $size / 2;
+    box-shadow: 0 0 0 3px $brand-primary;
+    cursor: ew-resize;
+    height: $size;
+    margin-top: -($size / 2);
+    width: $size;
+  }
+
+  &::-webkit-slider-runnable-track {
+    background-color: white;
+    height: 2px;
+    width: 100%;
+  }
+}

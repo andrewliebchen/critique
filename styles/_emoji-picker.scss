@@ -1,5 +1,13 @@
 $emoji-width: 3rem;
 
+.emoji {
+  font-size: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
 .picker {
   padding: 0.5rem;
   background-color: white;

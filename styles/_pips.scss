@@ -1,0 +1,59 @@
+.pips {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  &.can-add {
+    cursor: crosshair;
+  }
+}
+
+.pip__container {
+  position: absolute;
+  transform: translate3d(-50%, -50%, 0);
+
+  &.is-selected {
+    z-index: 9;
+  }
+}
+
+.pip {
+  cursor: default;
+  position: absolute;
+  text-shadow: 0 3px 10px rgba(black, 0.3);
+  transform: translate3d(-50%, -50%, 0);
+  user-select: none;
+
+  .is-adding-pips & {
+    filter: grayscale(100%);
+  }
+
+  .is-current & {
+    cursor: pointer;
+    filter: grayscale(0%);
+  }
+}
+
+.pip-enter {
+  opacity: 0.01;
+  transform: scale(0.5);
+
+  &.pip-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: 0.1s ease-out;
+  }
+}
+
+.pip-leave {
+  opacity: 1;
+  transform: scale(1);
+
+  &.pip-leave-active {
+    opacity: 0.01;
+    transform: scale(0.5);
+    transition: 0.1s ease-out;
+  }
+}

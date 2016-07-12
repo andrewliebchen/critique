@@ -1,0 +1,14 @@
+.image__container {
+  display: inline-block;
+  margin-bottom: 4rem;
+  position: relative;
+
+  .new-image & {
+    opacity: 0.2;
+    filter: blur(10px);
+  }
+}
+
+.image__element {
+  max-width: 100%;
+}
