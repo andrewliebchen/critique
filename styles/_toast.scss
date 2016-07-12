@@ -1,0 +1,11 @@
+.toast {
+  $offset: 1rem;
+  background-color: $brand-primary;
+  border-radius: $border-radius;
+  color: white;
+  min-width: 20rem;
+  padding: 1rem;
+  position: fixed;
+  right: $offset;
+  top: $offset;
+}
