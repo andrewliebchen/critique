@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import moment from 'moment';
 import Title from 'react-title-component'
 import { Flex, Box } from 'reflexbox';
 import { Images, Pips } from '../api/main';
@@ -19,10 +18,7 @@ class Image extends Component {
   render() {
     const { dataIsReady, image, pips } = this.props;
     if (dataIsReady) {
-      const lifespanEllapsed = moment(image.expires_at).subtract(Date.now());
-      const lifespanTotal = moment(image.expires_at).subtract(image.created_at);
-      const lifespan = lifespanEllapsed / lifespanTotal;
-      const isActive = lifespan > 0 || !image.expires_at;
+      const isActive = image.lifespan > 0;
       return (
         <Flex justify="center">
           <Title render={`${image.title} | Critique`}/>
@@ -39,7 +35,6 @@ class Image extends Component {
           <ImageFooter
             image={image}
             isActive={isActive}
-            lifespan={lifespan}
             pips={this.state.pips}
             pipsToggle={this.handlePipsToggle.bind(this)}/>
         </Flex>

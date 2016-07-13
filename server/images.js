@@ -8,7 +8,6 @@ Meteor.methods({
       title: args.title,
       lifespan: args.lifespan,
       created_at: args.created_at,
-      expires_at: args.expires_at,
       token: args.token,
     });
   },

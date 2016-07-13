@@ -3,9 +3,11 @@ import { Meteor } from 'meteor/meteor';
 import { Checkbox } from 'rebass';
 import { Flex, Box } from 'reflexbox';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import moment from 'moment';
 import classnames from 'classnames';
 import expireMessage from '../lib/expireMessage';
+
+import moment from 'moment';
+
 
 export default class ImageFooter extends Component {
   constructor(props) {
@@ -16,18 +18,21 @@ export default class ImageFooter extends Component {
   }
 
   render() {
-    const { image, isActive, lifespan, pips, pipsToggle } = this.props;
-    const isExpired = lifespan <= 0;
+    const { image, isActive, pips, pipsToggle } = this.props;
+    const lifespanEllapsed = image.lifespan - ((Date.now() - image.created_at) / 3600000);
+    const remainingLifespan = lifespanEllapsed / image.lifespan;
+    const isExpired = remainingLifespan < 0;
     const lifespanClassName = classnames({
       'lifespan': true,
       'is-expired': isExpired,
     });
+
     return (
       <footer className="footer">
         <Flex align="center">
           <h2 className="image__title">{image.title}</h2>
           <Box auto>
-            {isExpired ? 'Image is expired 🙅' : expireMessage(lifespan * 24)}
+            {isExpired ? 'Image is expired 🙅' : expireMessage(remainingLifespan)}
           </Box>
           <Box>
             <Checkbox
@@ -48,9 +53,9 @@ export default class ImageFooter extends Component {
             </CopyToClipboard>
           </Box>
         </Flex>
-        {image.expires_at > 0 &&
+        {image.lifespan > 0 &&
           <div className={lifespanClassName}>
-            <div className="lifespan__fill" style={{width: `${isActive ? 1 - lifespan : 1}%`}}/>
+            <div className="lifespan__fill" style={{width: `${isActive ? (1 - remainingLifespan) * 100 : 100}%`}}/>
           </div>}
       </footer>
     );
@@ -64,7 +69,6 @@ export default class ImageFooter extends Component {
 ImageFooter.propTypes = {
   image: PropTypes.object,
   isActive: PropTypes.bool,
-  lifespan: PropTypes.number,
   pips: PropTypes.bool,
   pipsToggle: PropTypes.func,
 };
