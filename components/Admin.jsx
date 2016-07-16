@@ -50,9 +50,9 @@ class Admin extends Component {
 
     if (!this.state.auth) {
       return (
-        <div className="inverse__wrapper">
+        <div className="login inverse__wrapper">
           <form
-            className="inverse__container"
+            className="login-form inverse__container"
             onSubmit={this.handlePassword.bind(this)}>
             <div className="form-group">
               <label>Password</label>
