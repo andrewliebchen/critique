@@ -1,21 +1,3 @@
-.new-image {
-  @include checkerboard($color-1: $brand-primary, $color-2: darken($brand-primary, 1%));
-  bottom: 0;
-  color: white;
-  left: 0;
-  overflow: auto;
-  position: fixed;
-  right: 0;
-  top: 0;
-}
-
-.new-image__container {
-  margin: 0 auto 3rem;
-  position: relative;
-  width: 32rem;
-  z-index: 1;
-}
-
 .dropzone {
   border-radius: $border-radius;
   border: 2px dashed;

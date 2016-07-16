@@ -50,10 +50,26 @@ class Admin extends Component {
 
     if (!this.state.auth) {
       return (
-        <form onSubmit={this.handlePassword.bind(this)}>
-          <input type="type" ref="password"/>
-          <input type="submit" value="Log in"/>
-        </form>
+        <div className="inverse__wrapper">
+          <form
+            className="inverse__container"
+            onSubmit={this.handlePassword.bind(this)}>
+            <div className="form-group">
+              <label>Password</label>
+              <input
+                type="type"
+                className="input"
+                placeholder="Magic word"
+                ref="password"/>
+            </div>
+            <div className="form-group">
+              <input
+                type="submit"
+                value="Log in 🔑"
+                className="button white big"/>
+            </div>
+          </form>
+        </div>
       );
     }
 

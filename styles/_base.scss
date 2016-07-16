@@ -22,3 +22,26 @@ h1 {
   background-color: $brand-primary;
   color: white;
 }
+
+.inverse__wrapper {
+  @include checkerboard($color-1: $brand-primary, $color-2: darken($brand-primary, 1%));
+  bottom: 0;
+  color: white;
+  left: 0;
+  overflow: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+
+  ::selection {
+    background-color: white;
+    color: $brand-primary;
+  }
+}
+
+.inverse__container {
+  margin: 0 auto 3rem;
+  position: relative;
+  width: 32rem;
+  z-index: 1;
+}

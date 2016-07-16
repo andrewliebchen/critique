@@ -23,9 +23,9 @@ export default class NewImage extends Component {
       'is-uploading': uploading,
     })
     return (
-      <div className="new-image">
+      <div className="new-image inverse__wrapper">
         <Title render="New image | Critique"/>
-        <div className="new-image__container">
+        <div className="new-image__container inverse__container">
           <h1>Welcome to Critique</h1>
           <p>
             Critique is a quick way to get pointed feedback on your designs.
