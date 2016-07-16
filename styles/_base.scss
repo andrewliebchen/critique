@@ -18,7 +18,8 @@ h1 {
   letter-spacing: 0.02em;
 }
 
-::selection {
+::selection,
+.input:focus::selection {
   background-color: $brand-primary;
   color: white;
 }

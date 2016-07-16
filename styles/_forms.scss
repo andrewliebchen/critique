@@ -20,11 +20,12 @@
   padding: 0.25rem 0.5rem;
   transition: 0.1s linear;
   width: 100%;
+  color: white;
 
   &:focus {
     background-color: white;
     color: $gray-dark;
-  }
+   }
 
   &::placeholder {
     color: rgba(white, 0.5);
@@ -64,15 +65,20 @@
 }
 
 .inline-form {
-  $button-width: 4rem;
+  $button-width: 7rem;
   position: relative;
 
   .input {
     padding-right: $button-width + 0.5rem;
+
+    &:focus ~ .button:hover {
+      background-color: $gray-light;
+      color: white;
+    }
   }
 
   .button {
-    right: 0.5rem;
+    right: 0.4rem;
     top: 50%;
     transform: translateY(-50%);
     position: absolute;
