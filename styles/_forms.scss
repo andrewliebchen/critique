@@ -62,3 +62,21 @@
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
 }
+
+.inline-form {
+  $button-width: 4rem;
+  position: relative;
+
+  .input {
+    padding-right: $button-width + 0.5rem;
+  }
+
+  .button {
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    width: $button-width;
+    border-radius: 0;
+  }
+}
