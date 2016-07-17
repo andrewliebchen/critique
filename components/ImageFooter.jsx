@@ -29,7 +29,7 @@ export default class ImageFooter extends Component {
         <Flex align="center">
           <h2 className="image__title">{image.title}</h2>
           <Box auto>
-            {isExpired ? 'Image is expired 🙅' : expireMessage(remainingLifespan)}
+            {isExpired ? 'Image is expired 🙅' : expireMessage(lifespanEllapsed)}
           </Box>
           <Box>
             <Checkbox
