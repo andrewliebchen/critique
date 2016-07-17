@@ -6,9 +6,6 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import classnames from 'classnames';
 import expireMessage from '../lib/expireMessage';
 
-import moment from 'moment';
-
-
 export default class ImageFooter extends Component {
   constructor(props) {
     super(props);
