@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import YouTube from 'react-youtube';
 
 export default class Landing extends Component {
   renderHoneypot() {
@@ -23,6 +24,17 @@ export default class Landing extends Component {
             Upload your design, set an expiration time like Snapchat (or let just it run forever), then send the link to whomever.
             They use emoji's to add feedback 👍👎 to specific points on the design.
           </p>
+          <YouTube
+            videoId="3v1dP1o7h0M"
+            className="youtube"
+            opts={{
+              height: '360',
+              width: '640',
+              autohide: 1,
+              fs: 0,
+              modestbranding: 1,
+              showinfo: 0,
+            }}/>
           <p>
             Leave your email, and I'll send you a beta invite.
             No span, I promise! 💖Andrew
