@@ -7,7 +7,7 @@ import Admin from './Admin.jsx';
 
 export default class App extends Component {
   componentDidMount() {
-    GAnalytics.pageview();
+    GAnalytics.pageview(); // eslint-disable-line
   }
 
   render() {
