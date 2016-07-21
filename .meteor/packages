@@ -21,3 +21,5 @@ react-meteor-data
 fourseven:scss
 seba:minifiers-autoprefixer
 edgee:slingshot
+meteorhacks:kadira
+datariot:ganalytics

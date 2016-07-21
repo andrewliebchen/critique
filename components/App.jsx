@@ -6,6 +6,10 @@ import NewImage from './NewImage.jsx'
 import Admin from './Admin.jsx';
 
 export default class App extends Component {
+  componentDidMount() {
+    GAnalytics.pageview();
+  }
+
   render() {
     return (
       <Router history={browserHistory}>
