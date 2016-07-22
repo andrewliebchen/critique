@@ -29,7 +29,7 @@ export default class ImageFooter extends Component {
         <Flex align="center">
           <h2 className="image__title">{image.title}</h2>
           <Box auto>
-            {isExpired ? 'Image is expired 🙅' : expireMessage(lifespanEllapsed)}
+            {isExpired ? 'Image is expired 🙅' : `⏳ ${expireMessage(lifespanEllapsed)}`}
           </Box>
           <Box>
             <Checkbox
@@ -52,7 +52,11 @@ export default class ImageFooter extends Component {
         </Flex>
         {image.lifespan > 0 &&
           <div className={lifespanClassName}>
-            <div className="lifespan__fill" style={{width: `${isActive ? (1 - remainingLifespan) * 100 : 100}%`}}/>
+            <div
+              className="lifespan__fill"
+              style={{
+                width: `${isActive ? (1 - remainingLifespan) * 100 : 100}%`
+              }}/>
           </div>}
       </footer>
     );
