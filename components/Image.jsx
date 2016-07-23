@@ -19,9 +19,8 @@ class Image extends Component {
   render() {
     const { dataIsReady, image, pips } = this.props;
     if (dataIsReady) {
-      // console.log(_.includes(localStorage.images, image._id));
-
       const isActive = image.lifespan > 0;
+      const canEdit = _.includes(localStorage.images, image._id);
       return (
         <Flex justify="center">
           <Title render={`${image.title} | Critique`}/>
@@ -39,7 +38,8 @@ class Image extends Component {
             image={image}
             isActive={isActive}
             pips={this.state.pips}
-            pipsToggle={this.handlePipsToggle.bind(this)}/>
+            pipsToggle={this.handlePipsToggle.bind(this)}
+            canEdit={canEdit}/>
         </Flex>
       );
     } else {

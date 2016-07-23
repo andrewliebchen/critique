@@ -57,7 +57,7 @@ export default class ImageFooter extends Component {
             <div
               className="lifespan__fill"
               style={{
-                width: `${isActive ? (1 - remainingLifespan) * 100 : 100}%`
+                width: `${isActive ? (1 - remainingLifespan) * 100 : 100}%`,
               }}/>
           </div>}
       </footer>
@@ -74,4 +74,5 @@ ImageFooter.propTypes = {
   isActive: PropTypes.bool,
   pips: PropTypes.bool,
   pipsToggle: PropTypes.func,
+  canEdit: PropTypes.bool,
 };
