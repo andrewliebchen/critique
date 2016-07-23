@@ -18,7 +18,7 @@ export default class ImageFooter extends Component {
     const { image, isActive, pips, pipsToggle } = this.props;
     const lifespanEllapsed = image.lifespan - ((Date.now() - image.created_at) / 3600000);
     const remainingLifespan = lifespanEllapsed / image.lifespan;
-    const isExpired = remainingLifespan < 0;
+    const isExpired = image.lifespan > 0 && remainingLifespan < 0;
     const lifespanClassName = classnames({
       'lifespan': true,
       'is-expired': isExpired,
