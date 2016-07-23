@@ -39,8 +39,40 @@
 }
 
 .image__title {
-  font-size: 1.2rem;
-  margin: 0;
   text-align: center;
   user-select: none;
+  position: relative;
+  margin: 0 1rem;
+  overflow: visible;
+
+  h2 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+}
+
+.image__input__container {
+  position: relative;
+}
+
+.image__input {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-top: -1px;
+  text-align: center;
+  padding-right: 2rem;
+}
+
+.image__input__cancel {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: 0.03s linear;
+
+  &:active {
+    margin-top: 2px;
+  }
 }

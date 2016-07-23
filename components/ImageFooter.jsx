@@ -11,11 +11,12 @@ export default class ImageFooter extends Component {
     super(props);
     this.state = {
       copied: false,
+      editTitle: false,
     };
   }
 
   render() {
-    const { image, isActive, pips, pipsToggle } = this.props;
+    const { image, isActive, pips, pipsToggle, canEdit } = this.props;
     const lifespanEllapsed = image.lifespan - ((Date.now() - image.created_at) / 3600000);
     const remainingLifespan = lifespanEllapsed / image.lifespan;
     const isExpired = image.lifespan > 0 && remainingLifespan < 0;
@@ -30,8 +31,24 @@ export default class ImageFooter extends Component {
           <Box>
             {isExpired ? 'Image is expired 🙅' : `⏳ ${expireMessage(lifespanEllapsed)}`}
           </Box>
-          <Box auto>
-            <h2 className="image__title">{image.title}</h2>
+          <Box
+            className="image__title"
+            auto>
+            {this.state.editTitle && canEdit ?
+              <div className="image__input__container">
+                <input
+                  type="text"
+                  className="input invert image__input"
+                  defaultValue={image.title}
+                  onKeyDown={this.handleUpdateTitle.bind(this)}
+                  autoFocus/>
+                <span
+                  className="image__input__cancel"
+                  onClick={this.handleEditTitleToggle.bind(this)}>
+                  ❌
+                </span>
+              </div>
+            : <h2 onClick={this.handleEditTitleToggle.bind(this)}>{image.title}</h2>}
           </Box>
           <Box>
             <Checkbox
@@ -66,6 +83,24 @@ export default class ImageFooter extends Component {
 
   handleCopy() {
     this.setState({copied: true});
+  }
+
+  handleEditTitleToggle() {
+    this.setState({editTitle: !this.state.editTitle});
+  }
+
+  handleUpdateTitle(event) {
+    const newTitle = event.target.value;
+    if (event.which === 13) {
+      Meteor.call('updateTitle', {
+        id: this.props.image._id,
+        title: newTitle,
+      }, (error, success) => {
+        if (success) {
+          this.setState({editTitle: false});
+        }
+      });
+    }
   }
 }
 

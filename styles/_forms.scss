@@ -25,10 +25,19 @@
   &:focus {
     background-color: white;
     color: $gray-dark;
-   }
+  }
 
   &::placeholder {
     color: rgba(white, 0.5);
+  }
+
+  &.invert {
+    border-color: $gray-dark;
+    color: $gray-dark;
+  }
+
+  &:focus {
+    border-color: $brand-primary;
   }
 }
 
