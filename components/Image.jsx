@@ -19,7 +19,7 @@ class Image extends Component {
   render() {
     const { dataIsReady, image, pips } = this.props;
     if (dataIsReady) {
-      console.log(_.includes(localStorage.images, image._id));
+      // console.log(_.includes(localStorage.images, image._id));
 
       const isActive = image.lifespan > 0;
       return (

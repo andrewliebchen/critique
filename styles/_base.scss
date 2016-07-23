@@ -49,11 +49,14 @@ h1 {
 
 .youtube {
   border-radius: $border-radius;
-  // border: 1px solid black;
   box-shadow: 0 2px 16px rgba(black, 0.2);
   left: 50%;
   margin: 1rem 0;
   overflow: auto;
   position: relative;
   transform: translateX(-50%);
+}
+
+.Box {
+  @include ellipsis;
 }

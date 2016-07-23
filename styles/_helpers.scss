@@ -27,3 +27,12 @@ $ease-in-out-back: cubic-bezier(0.680, -0.550, 0.265, 1.550);
   background-size: $size $size;
   background-position:0 0, $half $half;
 }
+
+@mixin ellipsis($width: 100%, $display: inline-block) {
+  display: $display;
+  max-width: $width;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
