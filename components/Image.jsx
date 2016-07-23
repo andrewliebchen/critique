@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
+import _ from 'lodash';
 import Title from 'react-title-component'
 import { Flex, Box } from 'reflexbox';
 import { Images, Pips } from '../api/main';
@@ -18,6 +19,8 @@ class Image extends Component {
   render() {
     const { dataIsReady, image, pips } = this.props;
     if (dataIsReady) {
+      console.log(_.includes(localStorage.images, image._id));
+
       const isActive = image.lifespan > 0;
       return (
         <Flex justify="center">

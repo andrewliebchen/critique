@@ -124,6 +124,12 @@ export default class NewImage extends Component {
         token: this.props.params.id,
       }, (err, id) => {
         if (id) {
+          const images = localStorage.images;
+          if (images) {
+            localStorage.setItem('images', images.concat([id]));
+          } else {
+            localStorage.setItem('images', [id]);
+          }
           window.location.href = `/i/${id}`;
         }
       });
